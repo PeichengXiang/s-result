@@ -20,7 +20,14 @@ import {
 } from '@/components/ui/select';
 import { LoginDialog, NoteDialog, type EditTarget } from './notes';
 import { api, hostedOrigin, onGitHub, type Note } from '@/lib/notes-client';
-import { data, ranking, leaders, pct, stepLabel } from '@/lib/results';
+import {
+  data,
+  ranking,
+  leaders,
+  pct,
+  stepLabel,
+  formatResultUpdateTime,
+} from '@/lib/results';
 
 export default function Dashboard() {
   const [active, setActive] = useState('sparkarena');
@@ -150,7 +157,11 @@ export default function Dashboard() {
         </a>
         <div className="header-actions">
           <span className="live-label">
-            公开成绩 · {data.updatedAt.slice(0, 10)}
+            公开成绩 · 最近上传：
+            <time dateTime={data.updatedAt}>
+              {formatResultUpdateTime(data.updatedAt)}
+            </time>
+            {' （北京时间）'}
           </span>
           <Button
             variant="outline"

@@ -11,6 +11,16 @@ export type Summary = {
   coverage: number;
 };
 export const data = snapshot;
+export const formatResultUpdateTime = (value: string) =>
+  new Intl.DateTimeFormat('zh-CN', {
+    timeZone: 'Asia/Shanghai',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    hourCycle: 'h23',
+  }).format(new Date(value));
 export const pct = (x: number | null | undefined) =>
   x == null ? '—' : `${(x * 100).toFixed(1)}%`;
 export const stepLabel = (n: number) =>

@@ -1,6 +1,13 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import {data,ranking,selectedCells} from '../work/metrics.mjs';
+import {data,ranking,selectedCells,formatResultUpdateTime} from '../work/metrics.mjs';
+assert.equal(formatResultUpdateTime('2026-09-08T09:30:36Z'), '2026年9月8日 17:30');
+assert.equal(formatResultUpdateTime('2026-09-08T15:59:59Z'), '2026年9月8日 23:59');
+assert.equal(formatResultUpdateTime('2026-09-08T16:00:00Z'), '2026年9月9日 00:00');
+assert.equal(formatResultUpdateTime('2026-09-30T16:00:00Z'), '2026年10月1日 00:00');
+assert.equal(formatResultUpdateTime('2026-12-31T16:00:00Z'), '2027年1月1日 00:00');
+assert.ok(Number.isFinite(Date.parse(data.updatedAt)), 'Result upload timestamp must be valid');
+console.log('Result upload timestamps use Beijing time, including midnight and date rollovers');
 const {excludedPolicies}=JSON.parse(readFileSync(new URL('../data/publication.json',import.meta.url),'utf8'));
 for(const b of data.benchmarks){
  assert.ok(b.models.every(m=>!excludedPolicies.includes(m.policy.toLowerCase())),'Unpublished policy was included in public data');
