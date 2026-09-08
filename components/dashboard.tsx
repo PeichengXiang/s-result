@@ -1,10 +1,6 @@
 'use client';
 import { useEffect, useMemo, useState } from 'react';
-import {
-  ArrowDown,
-  ArrowUpRight,
-  ChartNoAxesColumnIncreasing,
-} from 'lucide-react';
+import { ArrowDown, ChartNoAxesColumnIncreasing } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
   Table,
@@ -22,15 +18,13 @@ import {
   SelectContent,
   SelectItem,
 } from '@/components/ui/select';
-import TaskTables from './task-tables';
 import { LoginDialog, NoteDialog, type EditTarget } from './notes';
 import { api, hostedOrigin, onGitHub, type Note } from '@/lib/notes-client';
 import { data, ranking, leaders, pct, stepLabel } from '@/lib/results';
 
 export default function Dashboard() {
   const [active, setActive] = useState('sparkarena');
-  const [epoch, setEpoch] = useState('all'),
-    [policy, setPolicy] = useState('all');
+  const [epoch, setEpoch] = useState('all');
   const [notes, setNotes] = useState<Note[]>([]),
     [notesError, setNotesError] = useState(''),
     [authenticated, setAuthenticated] = useState(false),
@@ -86,9 +80,6 @@ export default function Dashboard() {
   const epochs = [...new Set(bench.records.map((r) => r.epoch))].sort(
     (a, b) => a - b,
   );
-  const policies = [
-    ...new Map(bench.models.map((m) => [m.policy, m.label])).entries(),
-  ].sort((a, b) => a[1].localeCompare(b[1]));
   const warning = (modelId: string) =>
     notes.some((n) => n.abnormal && n.key.startsWith(`${active}:${modelId}`));
   useEffect(() => {
@@ -130,7 +121,6 @@ export default function Dashboard() {
               throw new Error('无此 benchmark 或权重');
             setActive(b.id);
             setEpoch(v.epoch === undefined ? 'all' : String(v.epoch));
-            setPolicy('all');
             await new Promise<void>((resolve) =>
               requestAnimationFrame(() => resolve()),
             );
@@ -175,7 +165,6 @@ export default function Dashboard() {
         onValueChange={(v) => {
           setActive(String(v));
           setEpoch('all');
-          setPolicy('all');
         }}
       >
         <TabsList className="benchmark-tabs">
@@ -310,38 +299,9 @@ export default function Dashboard() {
       {!rows.length && (
         <div className="empty-state">
           当前权重尚无覆盖全部 {bench.tasks.length}{' '}
-          个任务的模型，可在下方查看已完成任务成绩。
+          个任务的模型，请选择其他权重范围。
         </div>
       )}
-      <div className="details-filter">
-        <label>
-          分表模型{' '}
-          <Select value={policy} onValueChange={(v) => setPolicy(String(v))}>
-            <SelectTrigger aria-label="分表模型">
-              <SelectValue>
-                {policy === 'all'
-                  ? '全部模型'
-                  : policies.find((p) => p[0] === policy)?.[1]}
-              </SelectValue>
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">全部模型</SelectItem>
-              {policies.map(([key, name]) => (
-                <SelectItem key={key} value={key}>
-                  {name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </label>
-      </div>
-      <TaskTables
-        bench={bench}
-        epoch={epoch}
-        policy={policy}
-        notes={notes}
-        edit={edit}
-      />
       <section className="leader-section">
         <div className="section-head">
           <h2>各任务，谁在领先</h2>
@@ -349,7 +309,7 @@ export default function Dashboard() {
         </div>
         <div className="leaders-grid">
           {wins.map(({ task, rate, winners }, i) => (
-            <a key={task.id} href={`#task-${task.id}`} className="leader-item">
+            <article key={task.id} className="leader-item">
               <div className="leader-top">
                 <span className="index">{String(i + 1).padStart(2, '0')}</span>
                 <strong title={task.source}>
@@ -358,7 +318,6 @@ export default function Dashboard() {
                     {task.short.replaceAll('-', ' ')}
                   </small>
                 </strong>
-                <ArrowUpRight size={15} />
               </div>
               <div className="leader-metric">
                 <span>
@@ -378,7 +337,7 @@ export default function Dashboard() {
               <div className="bar-track">
                 <div style={{ width: `${(rate ?? 0) * 100}%` }} />
               </div>
-            </a>
+            </article>
           ))}
         </div>
       </section>
@@ -401,7 +360,7 @@ export default function Dashboard() {
         <b>{bench.metric}</b>
         <p>
           {active === 'egovla'
-            ? '排名使用 Unseen 66 回合成功率，Seen 27 单独报告，93 回合用于判断测评是否完成。'
+            ? '排名使用 Unseen 66 回合成功率，全部 93 回合用于判断测评是否完成。'
             : 'SparkArena 总榜沿用评测 Web 的 5 项正式任务和目标回合数。'}{' '}
           同权重重复测评优先选完整轮次中平均成功率最高的一次，否则逐任务选择最佳完整单次。零成功率是有效成绩；缺失成绩显示为
           —。
