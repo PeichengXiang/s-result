@@ -332,6 +332,23 @@ h2 {
 .leader-section {
   margin-top: 40px;
 }
+.task-english {
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--muted-foreground);
+  line-height: 1.4;
+  margin-top: 3px;
+}
+th.task-column {
+  min-width: 138px;
+  max-width: 180px;
+  white-space: normal;
+  vertical-align: top;
+}
+.leader-top strong {
+  min-width: 0;
+}
 [data-slot='table-container'] {
   background: white;
   border: 1px solid var(--border);

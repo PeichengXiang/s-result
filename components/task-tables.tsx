@@ -52,7 +52,10 @@ export default function TaskTables({
             <div className="section-head">
               <h3>
                 <span className="index">{String(i + 1).padStart(2, '0')}</span>{' '}
-                {task.label} <small>{task.short}</small>
+                {task.label}{' '}
+                <small lang="en" title={task.source}>
+                  {task.short.replaceAll('-', ' ')}
+                </small>
               </h3>
               <span>{all.length} 条完成记录</span>
             </div>
@@ -129,7 +132,7 @@ export default function TaskTables({
                               onClick={() =>
                                 edit({
                                   key,
-                                  title: `${model.label} · ${task.label} · ${stepLabel(r.epoch)}`,
+                                  title: `${model.label} · ${task.label} / ${task.short.replaceAll('-', ' ')} · ${stepLabel(r.epoch)}`,
                                 })
                               }
                             >

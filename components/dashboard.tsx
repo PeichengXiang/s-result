@@ -247,7 +247,12 @@ export default function Dashboard() {
               <TableHead>平均成功率</TableHead>
               <TableHead>备注</TableHead>
               {bench.tasks.map((t) => (
-                <TableHead key={t.id}>{t.label}</TableHead>
+                <TableHead key={t.id} className="task-column" title={t.source}>
+                  <span>{t.label}</span>
+                  <small className="task-english" lang="en">
+                    {t.short.replaceAll('-', ' ')}
+                  </small>
+                </TableHead>
               ))}
             </TableRow>
           </TableHeader>
@@ -347,7 +352,12 @@ export default function Dashboard() {
             <a key={task.id} href={`#task-${task.id}`} className="leader-item">
               <div className="leader-top">
                 <span className="index">{String(i + 1).padStart(2, '0')}</span>
-                <strong>{task.label}</strong>
+                <strong title={task.source}>
+                  {task.label}
+                  <small className="task-english" lang="en">
+                    {task.short.replaceAll('-', ' ')}
+                  </small>
+                </strong>
                 <ArrowUpRight size={15} />
               </div>
               <div className="leader-metric">
