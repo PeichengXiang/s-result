@@ -1,5 +1,5 @@
 export const hostedOrigin =
-  'https://sparkarena-egovla-results.swoony-otter-6245.chatgpt.site';
+  'https://sparkarena-egovla-results.maverick-olson53ius.chatgpt.site';
 export type Note = {
   key: string;
   text: string;
