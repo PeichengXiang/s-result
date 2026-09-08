@@ -189,24 +189,6 @@ export default function Dashboard() {
           </TabsTrigger>
         </TabsList>
       </Tabs>
-      <section className="overview">
-        <div>
-          <p className="eyebrow">BENCHMARK OVERVIEW</p>
-          <h1>{bench.name}</h1>
-          <p className="muted">
-            {bench.tasks.length} 个任务 · {bench.models.length} 个模型版本 ·
-            全部已完成权重
-          </p>
-        </div>
-        <div className="top-score">
-          <span>综合领先</span>
-          <strong>{rows[0]?.model.label ?? '暂无全任务成绩'}</strong>
-          <div>
-            {pct(rows[0]?.rate)}{' '}
-            <small>{rows[0] && stepLabel(rows[0].epoch)}</small>
-          </div>
-        </div>
-      </section>
       <div className="filters">
         <label>
           权重范围{' '}
@@ -250,54 +232,13 @@ export default function Dashboard() {
           <span>请结合表格备注解读相关成绩。</span>
         </div>
       )}
-      <section className="leader-section">
-        <div className="section-head">
-          <h2>各任务，谁在领先</h2>
-          <span>单任务最佳成功率 · 可来自不同权重</span>
-        </div>
-        <div className="leaders-grid">
-          {wins.map(({ task, rate, winners }, i) => (
-            <a key={task.id} href={`#task-${task.id}`} className="leader-item">
-              <div className="leader-top">
-                <span className="index">{String(i + 1).padStart(2, '0')}</span>
-                <strong>{task.label}</strong>
-                <ArrowUpRight size={15} />
-              </div>
-              <div className="leader-metric">
-                <span>
-                  {rate === 0
-                    ? '暂无成功记录'
-                    : winners
-                        .slice(0, 2)
-                        .map(
-                          (w) =>
-                            (warning(w.modelId) ? '⚠️ ' : '') +
-                            bench.models.find((m) => m.id === w.modelId)?.label,
-                        )
-                        .join(' / ') || '暂无成绩'}
-                </span>
-                <b>{pct(rate)}</b>
-              </div>
-              <div className="bar-track">
-                <div style={{ width: `${(rate ?? 0) * 100}%` }} />
-              </div>
-            </a>
-          ))}
-        </div>
-      </section>
       <section id="overall" className="table-section">
         <div className="section-head">
-          <div>
-            <p className="eyebrow">01 / OVERALL</p>
-            <h2>总成绩</h2>
-          </div>
+          <h1>{bench.name} · 总成绩</h1>
           <a href="#method">
             统计口径 <ArrowDown size={14} />
           </a>
         </div>
-        <p className="table-hint">
-          每种模型选择全任务平均最高的同一权重；各任务等权平均。
-        </p>
         <Table>
           <TableHeader>
             <TableRow>
@@ -357,6 +298,9 @@ export default function Dashboard() {
             ))}
           </TableBody>
         </Table>
+        <p className="table-hint">
+          每种模型选择全任务平均最高的同一权重；各任务等权平均。
+        </p>
       </section>
       {!rows.length && (
         <div className="empty-state">
@@ -393,6 +337,41 @@ export default function Dashboard() {
         notes={notes}
         edit={edit}
       />
+      <section className="leader-section">
+        <div className="section-head">
+          <h2>各任务，谁在领先</h2>
+          <span>单任务最佳成功率 · 可来自不同权重</span>
+        </div>
+        <div className="leaders-grid">
+          {wins.map(({ task, rate, winners }, i) => (
+            <a key={task.id} href={`#task-${task.id}`} className="leader-item">
+              <div className="leader-top">
+                <span className="index">{String(i + 1).padStart(2, '0')}</span>
+                <strong>{task.label}</strong>
+                <ArrowUpRight size={15} />
+              </div>
+              <div className="leader-metric">
+                <span>
+                  {rate === 0
+                    ? '暂无成功记录'
+                    : winners
+                        .slice(0, 2)
+                        .map(
+                          (w) =>
+                            (warning(w.modelId) ? '⚠️ ' : '') +
+                            bench.models.find((m) => m.id === w.modelId)?.label,
+                        )
+                        .join(' / ') || '暂无成绩'}
+                </span>
+                <b>{pct(rate)}</b>
+              </div>
+              <div className="bar-track">
+                <div style={{ width: `${(rate ?? 0) * 100}%` }} />
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
       <NoteDialog
         target={login ? null : target}
         close={() => setTarget(null)}
