@@ -10,6 +10,7 @@ assert.ok(Number.isFinite(Date.parse(data.updatedAt)), 'Result upload timestamp 
 console.log('Result upload timestamps use Beijing time, including midnight and date rollovers');
 const {excludedPolicies}=JSON.parse(readFileSync(new URL('../data/publication.json',import.meta.url),'utf8'));
 for(const b of data.benchmarks){
+ if(b.id==='sparkarena') assert.deepEqual(b.tasks.map(t=>t.source),['click_mouse','collect_objects','dual_bottles_pick','hammer_beat','put_food_in_microwave','retrieve_gap','stack_bowls'],'SparkArena must use the seven canonical tasks');
  assert.ok(b.models.every(m=>!excludedPolicies.includes(m.policy.toLowerCase())),'Unpublished policy was included in public data');
  assert.ok(b.records.every(r=>b.models.some(m=>m.id===r.modelId)),'Public record references a missing model');
  const rows=ranking(b);assert.equal(rows.length,b.referenceRanking.length);
