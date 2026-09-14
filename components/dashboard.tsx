@@ -334,20 +334,44 @@ export default function Dashboard() {
                 <span>
                   {rate === 0
                     ? '暂无成功记录'
-                    : winners
-                        .slice(0, 2)
-                        .map(
-                          (w) =>
-                            (warning(w.modelId) ? '⚠️ ' : '') +
-                            bench.models.find((m) => m.id === w.modelId)?.label,
-                        )
-                        .join(' / ') || '暂无成绩'}
+                    : rate == null
+                      ? '暂无成绩'
+                      : '最佳成功率'}
                 </span>
                 <b>{pct(rate)}</b>
               </div>
               <div className="bar-track">
                 <div style={{ width: `${(rate ?? 0) * 100}%` }} />
               </div>
+              {rate != null && rate > 0 && (
+                <ul
+                  className="leader-models"
+                  aria-label={`${task.label}领先模型及权重`}
+                >
+                  {winners.map((w) => {
+                    const model = bench.models.find((m) => m.id === w.modelId)!;
+                    return (
+                      <li key={w.modelId} className="leader-model">
+                        <div className="leader-model-heading">
+                          <strong>
+                            {warning(w.modelId) && '⚠️ '}
+                            {model.label}
+                          </strong>
+                          <span
+                            className="weight-badge"
+                            title={`${w.epoch.toLocaleString()} steps`}
+                          >
+                            {w.epoch >= 10000
+                              ? `${+(w.epoch / 10000).toFixed(4)}万轮权重`
+                              : `${w.epoch.toLocaleString()}轮权重`}
+                          </span>
+                        </div>
+                        <small className="model-version">{model.name}</small>
+                      </li>
+                    );
+                  })}
+                </ul>
+              )}
             </article>
           ))}
         </div>

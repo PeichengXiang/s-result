@@ -289,11 +289,6 @@ h2 {
   gap: 12px;
   font-size: 14px;
 }
-.leader-metric span {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
 .leader-metric b {
   font-size: 21px;
   color: var(--bench);
@@ -307,6 +302,46 @@ h2 {
 .bar-track > div {
   height: 100%;
   background: var(--bench);
+}
+.leader-models {
+  display: grid;
+  gap: 12px;
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+}
+.leader-model + .leader-model {
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+}
+.leader-model-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+}
+.leader-model-heading strong {
+  font-size: 16px;
+  overflow-wrap: anywhere;
+}
+.weight-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--background);
+  color: var(--bench);
+  font-size: 14px;
+  font-weight: 600;
+}
+.leader-model .model-version {
+  max-width: none;
+  overflow: visible;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  font-size: 13px;
+  line-height: 1.5;
+  margin-top: 5px;
 }
 .table-section {
   margin-top: 48px;
@@ -485,7 +520,7 @@ footer > span {
     gap: 6px;
   }
   .leaders-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
   .leader-item {
     padding: 14px 12px;
