@@ -304,6 +304,10 @@ export default function Dashboard() {
           </TableBody>
         </Table>
         <p className="table-hint">
+          当前总榜要求同一模型权重覆盖 7 项正式任务；历史 5 项成绩与当前 7
+          项平均值不能直接比较。
+        </p>
+        <p className="table-hint">
           每种模型选择全任务平均最高的同一权重；各任务等权平均。
         </p>
       </section>
