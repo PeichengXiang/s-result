@@ -87,7 +87,7 @@ export function selectedCells(bench: Benchmark, epoch = 'all') {
 export function ranking(bench: Benchmark, epoch = 'all') {
   const best = new Map<string, Summary>();
   for (const row of selectedCells(bench, epoch)
-    .filter((x) => x.coverage === bench.tasks.length)
+    .filter((x) => x.coverage === bench.tasks.length && x.rate > 0)
     .sort(compare))
     if (!best.has(row.model.policy)) best.set(row.model.policy, row);
   return [...best.values()].sort(compare);
