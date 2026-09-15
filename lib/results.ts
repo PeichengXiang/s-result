@@ -55,7 +55,10 @@ export function selectedCells(bench: Benchmark, epoch = 'all') {
       );
     const full = [...rounds.values()]
       .map(rows)
-      .filter((ps) => ps.every(Boolean))
+      // Match eval Web: an all-zero batch must not hide completed reruns.
+      // Keep zero-valued task cells and raw records; only skip this batch
+      // when choosing the preferred complete round.
+      .filter((ps) => ps.every(Boolean) && ps.some((p) => p!.rate > 0))
       .sort((a, b) => {
         const rate = (p: (RecordRow | null)[]) =>
           p.reduce((s, x) => s + x!.rate, 0) / p.length;

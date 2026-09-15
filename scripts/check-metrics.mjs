@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import {data,ranking,selectedCells,formatResultUpdateTime} from '../work/metrics.mjs';
+import './check-repeated-evaluations.mjs';
 assert.equal(formatResultUpdateTime('2026-09-08T09:30:36Z'), '2026年9月8日 17:30');
 assert.equal(formatResultUpdateTime('2026-09-08T15:59:59Z'), '2026年9月8日 23:59');
 assert.equal(formatResultUpdateTime('2026-09-08T16:00:00Z'), '2026年9月9日 00:00');
