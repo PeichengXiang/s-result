@@ -25,8 +25,8 @@ const complete = benchmark([
   record(5, 0, 1, 'single'),
 ]);
 assert.deepEqual(ranking(complete)[0].cells.map((r) => r.id), ['r5', 'r4']);
-// EgoVLA retains its existing complete-round preference.
-assert.deepEqual(ranking({ ...complete, id: 'egovla' })[0].cells.map((r) => r.id), ['r3', 'r4']);
+// EgoVLA uses the same latest-task selection as the eval Web leaderboard.
+assert.deepEqual(ranking({ ...complete, id: 'egovla' })[0].cells.map((r) => r.id), ['r5', 'r4']);
 
 const latestLower = benchmark([
   record(10, 0, 0.2, 'new-a'), record(2, 1, 0.6, 'old'),
@@ -65,4 +65,4 @@ const otherModel = { ...model, id: 'other-model' };
 assert.equal(ranking({ ...benchmark([
   record(1, 0, 0.5, 'a'), { ...record(2, 1, 0.6, 'a'), modelId: otherModel.id },
 ]), models: [model, otherModel] }).length, 0);
-console.log('Repeated evaluations: latest task layers, zero-layer fallback, model/checkpoint isolation, historical leaders and EgoVLA preservation passed');
+console.log('Repeated evaluations: latest task layers, zero-layer fallback, model/checkpoint isolation and historical leaders passed');

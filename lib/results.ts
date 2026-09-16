@@ -68,36 +68,9 @@ export function selectedCells(bench: Benchmark, epoch = 'all') {
     groups.set(key, [...(groups.get(key) ?? []), p]);
   }
   return [...groups.values()].map((points) => {
-    const rounds = new Map<string, RecordRow[]>();
-    for (const p of points)
-      rounds.set(p.round, [...(rounds.get(p.round) ?? []), p]);
-    const rows = (ps: RecordRow[]) =>
-      bench.tasks.map(
-        (t) => ps.filter((p) => p.taskId === t.id).sort(better)[0] ?? null,
-      );
-    const full = [...rounds.values()]
-      .map(rows)
-      // Match eval Web: an all-zero batch must not hide completed reruns.
-      // Keep zero-valued task cells and raw records; only skip this batch
-      // when choosing the preferred complete round.
-      .filter((ps) => ps.every(Boolean) && ps.some((p) => p!.rate > 0))
-      .sort((a, b) => {
-        const rate = (p: (RecordRow | null)[]) =>
-          p.reduce((s, x) => s + x!.rate, 0) / p.length;
-        const score = (p: (RecordRow | null)[]) =>
-          p.every((x) => x!.score != null)
-            ? p.reduce((s, x) => s + x!.score!, 0) / p.length
-            : -1;
-        return (
-          rate(b) - rate(a) ||
-          score(b) - score(a) ||
-          Math.max(...b.map((x) => Number(x!.id.slice(1)))) -
-            Math.max(...a.map((x) => Number(x!.id.slice(1))))
-        );
-      });
-    const cells = bench.id === 'sparkarena'
-        ? latestTaskCells(bench, points)
-        : full[0] ?? rows(points),
+    // Match the current eval Web leaderboard for every benchmark: a newer
+    // completed task evaluation replaces the older value at the same step.
+    const cells = latestTaskCells(bench, points),
       valid = cells.filter((x): x is RecordRow => x !== null);
     return {
       model: bench.models.find((m) => m.id === points[0].modelId)!,
