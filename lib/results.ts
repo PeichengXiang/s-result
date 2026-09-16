@@ -38,6 +38,24 @@ export function compare(a: Summary, b: Summary) {
     b.rate - a.rate || (b.score ?? -1) - (a.score ?? -1) || b.epoch - a.epoch
   );
 }
+function latestTaskCells(bench: Benchmark, points: RecordRow[]) {
+  let remaining = points;
+  while (true) {
+    const cells = bench.tasks.map(
+      (task) => remaining
+        .filter((point) => point.taskId === task.id)
+        .sort((a, b) => Number(b.id.slice(1)) - Number(a.id.slice(1)) || better(a, b))[0] ?? null,
+    );
+    // Match the Web leaderboard: keep the latest task layer, including
+    // individual zero scores. Only an entirely zero layer falls back.
+    if (cells.some((point) => point === null) || cells.some((point) => point!.rate > 0))
+      return cells;
+    const selected = new Set(cells);
+    const earlier = remaining.filter((point) => !selected.has(point));
+    if (!earlier.length) return cells;
+    remaining = earlier;
+  }
+}
 export function selectedCells(bench: Benchmark, epoch = 'all') {
   const groups = new Map<string, RecordRow[]>();
   for (const p of bench.records) {
@@ -73,7 +91,9 @@ export function selectedCells(bench: Benchmark, epoch = 'all') {
             Math.max(...a.map((x) => Number(x!.id.slice(1))))
         );
       });
-    const cells = full[0] ?? rows(points),
+    const cells = bench.id === 'sparkarena'
+        ? latestTaskCells(bench, points)
+        : full[0] ?? rows(points),
       valid = cells.filter((x): x is RecordRow => x !== null);
     return {
       model: bench.models.find((m) => m.id === points[0].modelId)!,

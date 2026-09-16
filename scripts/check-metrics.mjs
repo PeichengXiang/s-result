@@ -15,7 +15,7 @@ for(const b of data.benchmarks){
  assert.ok(b.models.every(m=>!excludedPolicies.includes(m.policy.toLowerCase())),'Unpublished policy was included in public data');
  assert.ok(b.records.every(r=>b.models.some(m=>m.id===r.modelId)),'Public record references a missing model');
  const rows=ranking(b);assert.equal(rows.length,b.referenceRanking.length);
- rows.forEach((r,i)=>{const expected=b.referenceRanking[i];assert.equal(r.model.id,expected.modelId);assert.equal(r.epoch,expected.epoch);assert.ok(Math.abs(r.rate-expected.rate)<1e-12);assert.equal(r.coverage,b.tasks.length);});
+ rows.forEach((r,i)=>{const expected=b.referenceRanking[i];assert.equal(r.model.id,expected.modelId);assert.equal(r.epoch,expected.epoch);assert.ok(Math.abs(r.rate-expected.rate)<1e-12);assert.equal(r.score,expected.score);assert.deepEqual(b.id==='sparkarena'?r.cells:r.cells.map(c=>({taskId:c.taskId,rate:c.rate,score:c.score})),expected.cells);assert.equal(r.coverage,b.tasks.length);});
  for(const step of new Set(b.records.map(r=>r.epoch))){assert.ok(selectedCells(b,String(step)).every(r=>r.epoch===step));assert.ok(ranking(b,String(step)).every(r=>r.coverage===b.tasks.length));}
  const raw=JSON.stringify(b);assert.ok(!/\/personal\/|\/mnt\/|root@|checkpoint_path|model_root_path|SBk#|password/i.test(raw),'Private operational fields leaked');
  console.log(b.id,rows.length,'rankings match existing Web selection,',b.records.length,'completed records');
