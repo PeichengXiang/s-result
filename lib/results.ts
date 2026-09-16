@@ -23,8 +23,12 @@ export const formatResultUpdateTime = (value: string) =>
   }).format(new Date(value));
 export const pct = (x: number | null | undefined) =>
   x == null ? '—' : `${(x * 100).toFixed(1)}%`;
-export const stepLabel = (n: number) =>
-  n >= 10000 ? `${+(n / 10000).toFixed(4)}w` : `${n.toLocaleString()} steps`;
+export const displayStep = (n: number, benchmarkId?: string, policy?: string) =>
+  benchmarkId === 'sparkarena' && policy === 'pi_05' && n === 79999 ? 80000 : n;
+export const stepLabel = (n: number, benchmarkId?: string, policy?: string) => {
+  const step = displayStep(n, benchmarkId, policy);
+  return step >= 10000 ? `${+(step / 10000).toFixed(4)}w` : `${step.toLocaleString()} steps`;
+};
 export function better(a: RecordRow, b: RecordRow) {
   return (
     b.rate - a.rate ||

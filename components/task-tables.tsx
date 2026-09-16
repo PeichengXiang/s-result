@@ -99,7 +99,7 @@ export default function TaskTables({
                             </small>
                           </TableCell>
                           <TableCell>
-                            {stepLabel(r.epoch)}
+                            {stepLabel(r.epoch, bench.id, model.policy)}
                             {r.actualStep !== r.epoch && (
                               <small className="model-version">
                                 实际 {r.actualStep.toLocaleString()}
@@ -132,7 +132,7 @@ export default function TaskTables({
                               onClick={() =>
                                 edit({
                                   key,
-                                  title: `${model.label} · ${task.label} / ${task.short.replaceAll('-', ' ')} · ${stepLabel(r.epoch)}`,
+                                  title: `${model.label} · ${task.label} / ${task.short.replaceAll('-', ' ')} · ${stepLabel(r.epoch, bench.id, model.policy)}`,
                                 })
                               }
                             >

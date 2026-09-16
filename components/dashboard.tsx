@@ -26,6 +26,7 @@ import {
   leaders,
   pct,
   stepLabel,
+  displayStep,
   formatResultUpdateTime,
 } from '@/lib/results';
 
@@ -84,6 +85,9 @@ export default function Dashboard() {
   const bench = data.benchmarks.find((b) => b.id === active)!;
   const rows = useMemo(() => ranking(bench, epoch), [bench, epoch]);
   const wins = useMemo(() => leaders(bench, epoch), [bench, epoch]);
+  const filterStepLabel = (n: number) => bench.id === 'sparkarena' && n === 79999
+    ? `${stepLabel(n, bench.id, 'pi_05')}（π0.5）`
+    : stepLabel(n);
   const epochs = [...new Set(bench.records.map((r) => r.epoch))].sort(
     (a, b) => a - b,
   );
@@ -195,14 +199,14 @@ export default function Dashboard() {
           <Select value={epoch} onValueChange={(v) => setEpoch(String(v))}>
             <SelectTrigger aria-label="权重范围">
               <SelectValue>
-                {epoch === 'all' ? '所有已完成权重' : stepLabel(Number(epoch))}
+                {epoch === 'all' ? '所有已完成权重' : filterStepLabel(Number(epoch))}
               </SelectValue>
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">所有已完成权重</SelectItem>
               {epochs.map((n) => (
                 <SelectItem key={n} value={String(n)}>
-                  {stepLabel(n)}
+                  {filterStepLabel(n)}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -270,7 +274,7 @@ export default function Dashboard() {
                   </strong>
                   <small className="model-version">{row.model.name}</small>
                 </TableCell>
-                <TableCell>{stepLabel(row.epoch)}</TableCell>
+                <TableCell>{stepLabel(row.epoch, bench.id, row.model.policy)}</TableCell>
                 <TableCell className="average">{pct(row.rate)}</TableCell>
                 <TableCell className="note-cell">
                   {notes
@@ -354,6 +358,7 @@ export default function Dashboard() {
                 >
                   {winners.map((w) => {
                     const model = bench.models.find((m) => m.id === w.modelId)!;
+                    const weight = displayStep(w.epoch, bench.id, model.policy);
                     return (
                       <li key={w.modelId} className="leader-model">
                         <div className="leader-model-heading">
@@ -365,9 +370,9 @@ export default function Dashboard() {
                             className="weight-badge"
                             title={`${w.epoch.toLocaleString()} steps`}
                           >
-                            {w.epoch >= 10000
-                              ? `${+(w.epoch / 10000).toFixed(4)}万轮权重`
-                              : `${w.epoch.toLocaleString()}轮权重`}
+                            {weight >= 10000
+                              ? `${+(weight / 10000).toFixed(4)}万轮权重`
+                              : `${weight.toLocaleString()}轮权重`}
                           </span>
                         </div>
                         <small className="model-version">{model.name}</small>
