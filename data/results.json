@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-18T22:04:35Z",
+  "updatedAt": "2026-09-18T22:42:06Z",
   "source": "SparkArena and EgoVLA completed-results snapshot",
   "benchmarks": [
     {
@@ -12983,6 +12983,30 @@
           "seen": null,
           "rollouts": 50,
           "round": "50680b53593ca8d1"
+        },
+        {
+          "id": "r175772",
+          "modelId": "589b54eb8145d25c",
+          "taskId": "f9b8886e41100699",
+          "epoch": 10000,
+          "actualStep": 10000,
+          "rate": 0.06,
+          "score": 6,
+          "seen": null,
+          "rollouts": 50,
+          "round": "50680b53593ca8d1"
+        },
+        {
+          "id": "r175848",
+          "modelId": "589b54eb8145d25c",
+          "taskId": "fa9a6d4ac8ddc9dd",
+          "epoch": 20000,
+          "actualStep": 20000,
+          "rate": 0.38,
+          "score": 38,
+          "seen": null,
+          "rollouts": 50,
+          "round": "50680b53593ca8d1"
         }
       ],
       "referenceRanking": [
@@ -20469,9 +20493,89 @@
           "seen": 0.7037037037037037,
           "rollouts": 93,
           "round": "82382ef4a3bd38b5"
+        },
+        {
+          "id": "r175278",
+          "modelId": "e4965719063810bd",
+          "taskId": "7ba51578802854b6",
+          "epoch": 30000,
+          "actualStep": 30000,
+          "rate": 0.6515151515151515,
+          "score": 65.15151515151516,
+          "seen": 0.6666666666666666,
+          "rollouts": 93,
+          "round": "3a5dbe770b9f6efe"
         }
       ],
       "referenceRanking": [
+        {
+          "modelId": "e4965719063810bd",
+          "epoch": 30000,
+          "rate": 0.5164141414141415,
+          "score": 51.641414141414145,
+          "cells": [
+            {
+              "taskId": "4e11f5605f0d1c36",
+              "rate": 0.7575757575757576,
+              "score": 75.75757575757575
+            },
+            {
+              "taskId": "ea06c838cf5b0593",
+              "rate": 0.18181818181818182,
+              "score": 18.181818181818183
+            },
+            {
+              "taskId": "0dd0f37319c182fd",
+              "rate": 0.2727272727272727,
+              "score": 27.27272727272727
+            },
+            {
+              "taskId": "dc722d326cb493e7",
+              "rate": 0.6666666666666666,
+              "score": 66.66666666666666
+            },
+            {
+              "taskId": "7ba51578802854b6",
+              "rate": 0.6515151515151515,
+              "score": 65.15151515151516
+            },
+            {
+              "taskId": "ccf0ad9d84d5dcc9",
+              "rate": 0.8333333333333334,
+              "score": 83.33333333333334
+            },
+            {
+              "taskId": "8dde4c729d75c301",
+              "rate": 0.8787878787878788,
+              "score": 87.87878787878788
+            },
+            {
+              "taskId": "6c03003d7ca18979",
+              "rate": 0.13636363636363635,
+              "score": 13.636363636363635
+            },
+            {
+              "taskId": "12f18e05c47edb3d",
+              "rate": 0.16666666666666666,
+              "score": 16.666666666666664
+            },
+            {
+              "taskId": "78bad59b7de44579",
+              "rate": 0.48484848484848486,
+              "score": 48.484848484848484
+            },
+            {
+              "taskId": "2595277d6b507a34",
+              "rate": 0.5757575757575758,
+              "score": 57.57575757575758
+            },
+            {
+              "taskId": "b72565dfae232e52",
+              "rate": 0.5909090909090909,
+              "score": 59.09090909090909
+            }
+          ]
+        },
         {
           "modelId": "a09f3b9052f1c9c1",
           "epoch": 50000,
@@ -21013,74 +21117,6 @@
               "taskId": "b72565dfae232e52",
               "rate": 0.07575757575757576,
               "score": 7.575757575757576
-            }
-          ]
-        },
-        {
-          "modelId": "3dce4dfa5a7fcbcb",
-          "epoch": 80000,
-          "rate": 0.07954545454545454,
-          "score": 7.954545454545456,
-          "cells": [
-            {
-              "taskId": "4e11f5605f0d1c36",
-              "rate": 0.7424242424242424,
-              "score": 74.24242424242425
-            },
-            {
-              "taskId": "ea06c838cf5b0593",
-              "rate": 0,
-              "score": 0
-            },
-            {
-              "taskId": "0dd0f37319c182fd",
-              "rate": 0.045454545454545456,
-              "score": 4.545454545454546
-            },
-            {
-              "taskId": "dc722d326cb493e7",
-              "rate": 0.045454545454545456,
-              "score": 4.545454545454546
-            },
-            {
-              "taskId": "7ba51578802854b6",
-              "rate": 0,
-              "score": 0
-            },
-            {
-              "taskId": "ccf0ad9d84d5dcc9",
-              "rate": 0.07575757575757576,
-              "score": 7.575757575757576
-            },
-            {
-              "taskId": "8dde4c729d75c301",
-              "rate": 0.030303030303030304,
-              "score": 3.0303030303030303
-            },
-            {
-              "taskId": "6c03003d7ca18979",
-              "rate": 0.015151515151515152,
-              "score": 1.5151515151515151
-            },
-            {
-              "taskId": "12f18e05c47edb3d",
-              "rate": 0,
-              "score": 0
-            },
-            {
-              "taskId": "78bad59b7de44579",
-              "rate": 0,
-              "score": 0
-            },
-            {
-              "taskId": "2595277d6b507a34",
-              "rate": 0,
-              "score": 0
-            },
-            {
-              "taskId": "b72565dfae232e52",
-              "rate": 0,
-              "score": 0
             }
           ]
         }
