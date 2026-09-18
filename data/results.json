@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-18T16:03:30Z",
+  "updatedAt": "2026-09-18T19:03:32Z",
   "source": "SparkArena and EgoVLA completed-results snapshot",
   "benchmarks": [
     {
@@ -345,6 +345,12 @@
           "policy": "spark_0",
           "label": "Spark 0",
           "name": "spark_pretrain_freeze_vlm_pretrain_stats"
+        },
+        {
+          "id": "5a328e67d27820f6",
+          "policy": "rldx_1",
+          "label": "RLDX-1",
+          "name": "RLDX-1_0918_SparkArena"
         }
       ],
       "records": [
@@ -12791,6 +12797,78 @@
           "seen": null,
           "rollouts": 50,
           "round": "78bae87139dcd1c0"
+        },
+        {
+          "id": "r170041",
+          "modelId": "5a328e67d27820f6",
+          "taskId": "fa9a6d4ac8ddc9dd",
+          "epoch": 50000,
+          "actualStep": 50000,
+          "rate": 0.04,
+          "score": 4,
+          "seen": null,
+          "rollouts": 50,
+          "round": "4bcee1d4f57545be"
+        },
+        {
+          "id": "r170479",
+          "modelId": "5a328e67d27820f6",
+          "taskId": "94aaa6b21bae44da",
+          "epoch": 50000,
+          "actualStep": 50000,
+          "rate": 0,
+          "score": 9.1,
+          "seen": null,
+          "rollouts": 50,
+          "round": "51c8013b2d32ab12"
+        },
+        {
+          "id": "r170535",
+          "modelId": "5a328e67d27820f6",
+          "taskId": "57a688a344c715b8",
+          "epoch": 50000,
+          "actualStep": 50000,
+          "rate": 0.32,
+          "score": 32,
+          "seen": null,
+          "rollouts": 50,
+          "round": "51c8013b2d32ab12"
+        },
+        {
+          "id": "r170689",
+          "modelId": "5a328e67d27820f6",
+          "taskId": "d3499a24d9726eaa",
+          "epoch": 50000,
+          "actualStep": 50000,
+          "rate": 0.02,
+          "score": 4.999999999999998,
+          "seen": null,
+          "rollouts": 50,
+          "round": "51c8013b2d32ab12"
+        },
+        {
+          "id": "r171067",
+          "modelId": "5a328e67d27820f6",
+          "taskId": "fa9a6d4ac8ddc9dd",
+          "epoch": 50000,
+          "actualStep": 50000,
+          "rate": 0.04,
+          "score": 4,
+          "seen": null,
+          "rollouts": 50,
+          "round": "51c8013b2d32ab12"
+        },
+        {
+          "id": "r171751",
+          "modelId": "5a328e67d27820f6",
+          "taskId": "6f5191440bd633ae",
+          "epoch": 50000,
+          "actualStep": 50000,
+          "rate": 0.16,
+          "score": 29.20000000000001,
+          "seen": null,
+          "rollouts": 50,
+          "round": "51c8013b2d32ab12"
         }
       ],
       "referenceRanking": [
@@ -13885,6 +13963,12 @@
           "policy": "spark_0",
           "label": "Spark 0",
           "name": "Spark0-0914-Inspire12-EgoVLA"
+        },
+        {
+          "id": "e4965719063810bd",
+          "policy": "vitra",
+          "label": "VITRA",
+          "name": "VITRA_0918_egovlabenchmark"
         }
       ],
       "records": [
@@ -19983,74 +20067,170 @@
           "seen": 0.6666666666666666,
           "rollouts": 93,
           "round": "241abe80b50fff1f"
+        },
+        {
+          "id": "r164937",
+          "modelId": "a09f3b9052f1c9c1",
+          "taskId": "2595277d6b507a34",
+          "epoch": 50000,
+          "actualStep": 50000,
+          "rate": 0.6515151515151515,
+          "score": 65.15151515151516,
+          "seen": 0.7037037037037037,
+          "rollouts": 93,
+          "round": "6f177c5cad10962f"
+        },
+        {
+          "id": "r167326",
+          "modelId": "a94b7c0040883701",
+          "taskId": "6c03003d7ca18979",
+          "epoch": 50000,
+          "actualStep": 50000,
+          "rate": 0.07575757575757576,
+          "score": 7.575757575757576,
+          "seen": 0.037037037037037035,
+          "rollouts": 93,
+          "round": "8b9087ff4b84e111"
+        },
+        {
+          "id": "r168006",
+          "modelId": "a94b7c0040883701",
+          "taskId": "b72565dfae232e52",
+          "epoch": 50000,
+          "actualStep": 50000,
+          "rate": 0.24242424242424243,
+          "score": 24.242424242424242,
+          "seen": 0.2962962962962963,
+          "rollouts": 93,
+          "round": "8af0cdec079047d3"
+        },
+        {
+          "id": "r168407",
+          "modelId": "a94b7c0040883701",
+          "taskId": "ea06c838cf5b0593",
+          "epoch": 50000,
+          "actualStep": 50000,
+          "rate": 0.3787878787878788,
+          "score": 37.878787878787875,
+          "seen": 0.37037037037037035,
+          "rollouts": 93,
+          "round": "8b9087ff4b84e111"
+        },
+        {
+          "id": "r169021",
+          "modelId": "a94b7c0040883701",
+          "taskId": "dc722d326cb493e7",
+          "epoch": 50000,
+          "actualStep": 50000,
+          "rate": 0.6515151515151515,
+          "score": 65.15151515151516,
+          "seen": 0.4444444444444444,
+          "rollouts": 93,
+          "round": "8047624565ce4a4d"
+        },
+        {
+          "id": "r169410",
+          "modelId": "a09f3b9052f1c9c1",
+          "taskId": "dc722d326cb493e7",
+          "epoch": 50000,
+          "actualStep": 50000,
+          "rate": 0.4393939393939394,
+          "score": 43.93939393939394,
+          "seen": 0.2962962962962963,
+          "rollouts": 93,
+          "round": "4d2e2549bf7ff363"
+        },
+        {
+          "id": "r169468",
+          "modelId": "a09f3b9052f1c9c1",
+          "taskId": "78bad59b7de44579",
+          "epoch": 50000,
+          "actualStep": 50000,
+          "rate": 0.9393939393939394,
+          "score": 93.93939393939394,
+          "seen": 0.9629629629629629,
+          "rollouts": 93,
+          "round": "4d2e2549bf7ff363"
+        },
+        {
+          "id": "r170860",
+          "modelId": "e4965719063810bd",
+          "taskId": "78bad59b7de44579",
+          "epoch": 30000,
+          "actualStep": 30000,
+          "rate": 0.48484848484848486,
+          "score": 48.484848484848484,
+          "seen": 0.3333333333333333,
+          "rollouts": 93,
+          "round": "edbc153c3d686938"
         }
       ],
       "referenceRanking": [
         {
-          "modelId": "a94b7c0040883701",
+          "modelId": "a09f3b9052f1c9c1",
           "epoch": 50000,
-          "rate": 0.4646464646464646,
-          "score": 46.46464646464646,
+          "rate": 0.5126262626262627,
+          "score": 51.26262626262627,
           "cells": [
             {
               "taskId": "4e11f5605f0d1c36",
+              "rate": 0.6515151515151515,
+              "score": 65.15151515151516
+            },
+            {
+              "taskId": "ea06c838cf5b0593",
+              "rate": 0.5151515151515151,
+              "score": 51.515151515151516
+            },
+            {
+              "taskId": "0dd0f37319c182fd",
+              "rate": 0.25757575757575757,
+              "score": 25.757575757575758
+            },
+            {
+              "taskId": "dc722d326cb493e7",
+              "rate": 0.4393939393939394,
+              "score": 43.93939393939394
+            },
+            {
+              "taskId": "7ba51578802854b6",
+              "rate": 0.24242424242424243,
+              "score": 24.242424242424242
+            },
+            {
+              "taskId": "ccf0ad9d84d5dcc9",
               "rate": 0.6666666666666666,
               "score": 66.66666666666666
             },
             {
-              "taskId": "ea06c838cf5b0593",
-              "rate": 0.3484848484848485,
-              "score": 34.84848484848485
-            },
-            {
-              "taskId": "0dd0f37319c182fd",
-              "rate": 0.19696969696969696,
-              "score": 19.696969696969695
-            },
-            {
-              "taskId": "dc722d326cb493e7",
-              "rate": 0.5757575757575758,
-              "score": 57.57575757575758
-            },
-            {
-              "taskId": "7ba51578802854b6",
-              "rate": 0.42424242424242425,
-              "score": 42.42424242424242
-            },
-            {
-              "taskId": "ccf0ad9d84d5dcc9",
-              "rate": 0.7575757575757576,
-              "score": 75.75757575757575
-            },
-            {
               "taskId": "8dde4c729d75c301",
-              "rate": 0.7727272727272727,
-              "score": 77.27272727272727
+              "rate": 0.7424242424242424,
+              "score": 74.24242424242425
             },
             {
               "taskId": "6c03003d7ca18979",
-              "rate": 0.030303030303030304,
-              "score": 3.0303030303030303
+              "rate": 0.06060606060606061,
+              "score": 6.0606060606060606
             },
             {
               "taskId": "12f18e05c47edb3d",
-              "rate": 0.22727272727272727,
-              "score": 22.727272727272727
+              "rate": 0.4090909090909091,
+              "score": 40.909090909090914
             },
             {
               "taskId": "78bad59b7de44579",
-              "rate": 0.8333333333333334,
-              "score": 83.33333333333334
+              "rate": 0.9393939393939394,
+              "score": 93.93939393939394
             },
             {
               "taskId": "2595277d6b507a34",
-              "rate": 0.3787878787878788,
-              "score": 37.878787878787875
+              "rate": 0.6515151515151515,
+              "score": 65.15151515151516
             },
             {
               "taskId": "b72565dfae232e52",
-              "rate": 0.36363636363636365,
-              "score": 36.36363636363637
+              "rate": 0.5757575757575758,
+              "score": 57.57575757575758
             }
           ]
         },
