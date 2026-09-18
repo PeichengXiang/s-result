@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-18T13:09:28Z",
+  "updatedAt": "2026-09-18T16:03:30Z",
   "source": "SparkArena and EgoVLA completed-results snapshot",
   "benchmarks": [
     {
@@ -19875,6 +19875,114 @@
           "seen": 0.6666666666666666,
           "rollouts": 93,
           "round": "5ea1e90c74169fcb"
+        },
+        {
+          "id": "r163908",
+          "modelId": "a09f3b9052f1c9c1",
+          "taskId": "b72565dfae232e52",
+          "epoch": 50000,
+          "actualStep": 50000,
+          "rate": 0.5757575757575758,
+          "score": 57.57575757575758,
+          "seen": 0.5555555555555556,
+          "rollouts": 93,
+          "round": "241abe80b50fff1f"
+        },
+        {
+          "id": "r164034",
+          "modelId": "a09f3b9052f1c9c1",
+          "taskId": "6c03003d7ca18979",
+          "epoch": 50000,
+          "actualStep": 50000,
+          "rate": 0.06060606060606061,
+          "score": 6.0606060606060606,
+          "seen": 0.037037037037037035,
+          "rollouts": 93,
+          "round": "d46064b0b0e02289"
+        },
+        {
+          "id": "r166514",
+          "modelId": "a09f3b9052f1c9c1",
+          "taskId": "0dd0f37319c182fd",
+          "epoch": 50000,
+          "actualStep": 50000,
+          "rate": 0.25757575757575757,
+          "score": 25.757575757575758,
+          "seen": 0.2222222222222222,
+          "rollouts": 93,
+          "round": "a02dc382c29ea13c"
+        },
+        {
+          "id": "r166525",
+          "modelId": "a94b7c0040883701",
+          "taskId": "12f18e05c47edb3d",
+          "epoch": 50000,
+          "actualStep": 50000,
+          "rate": 0.22727272727272727,
+          "score": 22.727272727272727,
+          "seen": 0.2222222222222222,
+          "rollouts": 93,
+          "round": "d4e194045fe128df"
+        },
+        {
+          "id": "r166776",
+          "modelId": "a94b7c0040883701",
+          "taskId": "8dde4c729d75c301",
+          "epoch": 50000,
+          "actualStep": 50000,
+          "rate": 0.7727272727272727,
+          "score": 77.27272727272727,
+          "seen": 0.8518518518518519,
+          "rollouts": 93,
+          "round": "2dbdad731081fb95"
+        },
+        {
+          "id": "r167314",
+          "modelId": "a94b7c0040883701",
+          "taskId": "4e11f5605f0d1c36",
+          "epoch": 50000,
+          "actualStep": 50000,
+          "rate": 0.6666666666666666,
+          "score": 66.66666666666666,
+          "seen": 0.7037037037037037,
+          "rollouts": 93,
+          "round": "2dbdad731081fb95"
+        },
+        {
+          "id": "r168005",
+          "modelId": "a94b7c0040883701",
+          "taskId": "ccf0ad9d84d5dcc9",
+          "epoch": 50000,
+          "actualStep": 50000,
+          "rate": 0.7575757575757576,
+          "score": 75.75757575757575,
+          "seen": 0.7777777777777778,
+          "rollouts": 93,
+          "round": "8af0cdec079047d3"
+        },
+        {
+          "id": "r168009",
+          "modelId": "a09f3b9052f1c9c1",
+          "taskId": "7ba51578802854b6",
+          "epoch": 50000,
+          "actualStep": 50000,
+          "rate": 0.24242424242424243,
+          "score": 24.242424242424242,
+          "seen": 0.2222222222222222,
+          "rollouts": 93,
+          "round": "6f177c5cad10962f"
+        },
+        {
+          "id": "r168011",
+          "modelId": "a09f3b9052f1c9c1",
+          "taskId": "ccf0ad9d84d5dcc9",
+          "epoch": 50000,
+          "actualStep": 50000,
+          "rate": 0.6666666666666666,
+          "score": 66.66666666666666,
+          "seen": 0.6666666666666666,
+          "rollouts": 93,
+          "round": "241abe80b50fff1f"
         }
       ],
       "referenceRanking": [
@@ -19886,8 +19994,8 @@
           "cells": [
             {
               "taskId": "4e11f5605f0d1c36",
-              "rate": 0.6515151515151515,
-              "score": 65.15151515151516
+              "rate": 0.6666666666666666,
+              "score": 66.66666666666666
             },
             {
               "taskId": "ea06c838cf5b0593",
@@ -19926,8 +20034,8 @@
             },
             {
               "taskId": "12f18e05c47edb3d",
-              "rate": 0.24242424242424243,
-              "score": 24.242424242424242
+              "rate": 0.22727272727272727,
+              "score": 22.727272727272727
             },
             {
               "taskId": "78bad59b7de44579",
