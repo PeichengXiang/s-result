@@ -62,8 +62,16 @@ export default function Dashboard() {
   function openHostedEditor(url: string) {
     // GitHub Pages is the canonical public score snapshot. Keep it open while
     // the separate editor origin handles authentication and note writes.
-    const editor = window.open(url, '_blank', 'noopener,noreferrer');
-    if (!editor) location.href = url;
+    const editor = window.open(url, '_blank');
+    if (editor) {
+      try {
+        editor.opener = null;
+      } catch {
+        /* Some browsers expose the opened window as read-only. */
+      }
+    } else {
+      location.href = url;
+    }
   }
   function edit(t: EditTarget) {
     if (onGitHub()) {
