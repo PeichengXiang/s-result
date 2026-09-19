@@ -59,9 +59,17 @@ export default function Dashboard() {
       setNotesError((e as Error).message);
     }
   }
+  function openHostedEditor(url: string) {
+    // GitHub Pages is the canonical public score snapshot. Keep it open while
+    // the separate editor origin handles authentication and note writes.
+    const editor = window.open(url, '_blank', 'noopener,noreferrer');
+    if (!editor) location.href = url;
+  }
   function edit(t: EditTarget) {
     if (onGitHub()) {
-      location.href = `${hostedOrigin}/?benchmark=${active}&edit=${encodeURIComponent(t.key)}`;
+      openHostedEditor(
+        `${hostedOrigin}/?benchmark=${active}&edit=${encodeURIComponent(t.key)}&source=github`,
+      );
       return;
     }
     setTarget(t);
@@ -69,7 +77,7 @@ export default function Dashboard() {
   }
   function openLogin() {
     if (onGitHub()) {
-      location.href = `${hostedOrigin}/?benchmark=${active}&login=1`;
+      openHostedEditor(`${hostedOrigin}/?benchmark=${active}&login=1&source=github`);
       return;
     }
     setLogin(true);
