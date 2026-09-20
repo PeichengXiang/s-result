@@ -59,18 +59,39 @@ export function safeEqual(a: string, b: string) {
     v |= (a.charCodeAt(i) || 0) ^ (b.charCodeAt(i) || 0);
   return v === 0;
 }
+export const githubPagesOrigin = 'https://peichengxiang.github.io';
+export function fromGitHubPages(req: Request) {
+  return req.headers.get('origin') === githubPagesOrigin;
+}
+export function cors(req: Request): Record<string, string> {
+  return fromGitHubPages(req)
+    ? {
+        'Access-Control-Allow-Origin': githubPagesOrigin,
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+        Vary: 'Origin',
+      }
+    : {};
+}
 export function sameOrigin(req: Request) {
-  return req.headers.get('origin') === new URL(req.url).origin;
+  const origin = req.headers.get('origin');
+  return origin === new URL(req.url).origin || origin === githubPagesOrigin;
 }
 export const cookieName = 'arena_session';
 export async function sessionHash(req: Request) {
-  const token = req.headers
+  const bearer = req.headers
+    .get('authorization')
+    ?.match(/^Bearer\s+([a-f0-9]{64})$/i)?.[1];
+  const cookieToken = req.headers
     .get('cookie')
     ?.split(';')
     .map((x) => x.trim())
     .find((x) => x.startsWith(cookieName + '='))
     ?.slice(cookieName.length + 1);
-  return token && /^[a-f0-9]{64}$/.test(token) ? sha(token) : null;
+  const token = bearer ?? cookieToken;
+  return token && /^[a-f0-9]{64}$/i.test(token)
+    ? sha(token.toLowerCase())
+    : null;
 }
 export async function authenticated(req: Request) {
   const hash = await sessionHash(req);

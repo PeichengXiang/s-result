@@ -13,7 +13,7 @@
 - EgoVLA 保持原有规则：优先取同权重有成功记录的完整测评轮次中平均最高的一次；没有此类轮次时，各任务取最佳完整单次。测评轮次沿用 Web 批次分组，不能用单任务 run ID 拆分完整批次。两个总榜均不展示缺任务或总分为 0 的模型；有效的单任务 0 分和原始记录仍保留。
 - 表格后面的图展示各任务最佳完整单次，可能来自不同权重，与总榜口径有意区分。低分或 0 分不会自动标记异常。
 - 这是本项目测评成绩，不是 benchmark 原作者的官方排行榜。历史测评可能使用不同适配版本；请结合人工备注解读。
-- ACT 尚未完成整套评测，暂不公开其成绩。`data/publication.json` 保存暂缓发布的模型，重新导出时也须排除，不能因为部分任务完成就自动恢复。
+- ACT 的 SparkArena 与 EgoVLA 成绩已公开；同一 ACT 模型的分任务测评会合并展示为一个模型。SparkArena 计入完整总榜，EgoVLA 因尚未完成全部任务而作为补充行展示，不参与总榜排序。
 
 ## 开发与发布
 
@@ -21,7 +21,7 @@ Node.js 22.13+，pnpm。`pnpm install`、`pnpm dev`、`pnpm build`。
 
 完整网站为 Cloudflare Worker 兼容输出，备注、会话和登录限流存储于 D1。`db/schema.ts` 定义 schema，`pnpm db:generate` 生成迁移，迁移随部署应用。
 
-`pnpm build:pages` 生成 `docs/`，GitHub Pages 可从 `main` 分支的 `/docs` 发布。GitHub Pages 公开页面直接展示完整成绩，并从完整网站读取备注。由于 Pages 无法运行服务端，编辑时会打开相同界面的完整网站；管理员密码不会进入前端。
+`pnpm build:pages` 生成 `docs/`，GitHub Pages 可从 `main` 分支的 `/docs` 发布。GitHub Pages 同时展示完整成绩、备注和管理员登录框；认证和备注保存请求由远端服务处理，因此登录和编辑始终留在当前 GitHub 页面，管理员密码不会写入前端文件。
 
 运行环境需配置 `.env.example` 中的变量。密码校验采用带随机盐的 PBKDF2-SHA256（100,000 次）；设置值到托管平台的 secret，切勿提交 `.env` / `.dev.vars`。
 

@@ -19,7 +19,7 @@ import {
   SelectItem,
 } from '@/components/ui/select';
 import { LoginDialog, NoteDialog, type EditTarget } from './notes';
-import { api, hostedOrigin, onGitHub, type Note } from '@/lib/notes-client';
+import { api, type Note } from '@/lib/notes-client';
 import {
   data,
   ranking,
@@ -47,10 +47,9 @@ export default function Dashboard() {
     if (q.has('login')) setLogin(true);
     if (q.get('edit')) setTarget({ key: q.get('edit')!, title: '编辑备注' });
     void reloadNotes();
-    if (!onGitHub())
-      void api('session')
-        .then((s) => setAuthenticated(s.authenticated))
-        .catch(() => {});
+    void api('session')
+      .then((s) => setAuthenticated(s.authenticated))
+      .catch(() => {});
   }, []);
   async function reloadNotes() {
     try {
@@ -61,35 +60,11 @@ export default function Dashboard() {
       setNotesError((e as Error).message);
     }
   }
-  function openHostedEditor(url: string) {
-    // GitHub Pages is the canonical public score snapshot. Keep it open while
-    // the separate editor origin handles authentication and note writes.
-    const editor = window.open(url, '_blank');
-    if (editor) {
-      try {
-        editor.opener = null;
-      } catch {
-        /* Some browsers expose the opened window as read-only. */
-      }
-    } else {
-      location.href = url;
-    }
-  }
   function edit(t: EditTarget) {
-    if (onGitHub()) {
-      openHostedEditor(
-        `${hostedOrigin}/?benchmark=${active}&edit=${encodeURIComponent(t.key)}&source=github`,
-      );
-      return;
-    }
     setTarget(t);
     if (!authenticated) setLogin(true);
   }
   function openLogin() {
-    if (onGitHub()) {
-      openHostedEditor(`${hostedOrigin}/?benchmark=${active}&login=1&source=github`);
-      return;
-    }
     setLogin(true);
   }
   async function logout() {

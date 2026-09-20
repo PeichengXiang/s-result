@@ -1,39 +1,42 @@
-import { data } from '@/lib/results';
-import { authenticated, body, db, json, sameOrigin } from '@/lib/server';
+import { authenticated, body, cors, db, json, sameOrigin } from '@/lib/server';
 export const dynamic = 'force-dynamic';
-const keys = new Set(
-  data.benchmarks.flatMap((b) => [
-    ...b.models.map((m) => `${b.id}:${m.id}`),
-    ...b.records.map((r) => `${b.id}:${r.modelId}:${r.taskId}:${r.epoch}`),
-  ]),
-);
-export async function GET() {
-  const headers = { 'Access-Control-Allow-Origin': '*' };
+const noteKey = /^(sparkarena|egovla):[0-9a-f]{16}(?::[0-9a-f]{16}:[0-9]+)?$/i;
+const reply = (
+  req: Request,
+  value: unknown,
+  status = 200,
+  extra: Record<string, string> = {},
+) => json(value, status, { ...cors(req), ...extra });
+export function OPTIONS(req: Request) {
+  return new Response(null, { status: 204, headers: cors(req) });
+}
+export async function GET(req: Request) {
   try {
     const { results } = await db()
       .prepare('SELECT key,text,abnormal,version,updated_at,author FROM notes')
       .all();
-    return json({ notes: results }, 200, headers);
+    return reply(req, { notes: results });
   } catch {
-    return json({ error: '备注暂时无法加载，成绩仍可查看' }, 503, headers);
+    return reply(req, { error: '备注暂时无法加载，成绩仍可查看' }, 503);
   }
 }
 export async function PUT(req: Request) {
-  if (!sameOrigin(req)) return json({ error: '请求来源不匹配' }, 403);
+  if (!sameOrigin(req)) return reply(req, { error: '请求来源不匹配' }, 403);
   try {
-    if (!(await authenticated(req))) return json({ error: '请先登录' }, 401);
+    if (!(await authenticated(req))) return reply(req, { error: '请先登录' }, 401);
     const input = await body(req);
     if (
-      !keys.has(input.key) ||
+      typeof input.key !== 'string' ||
+      !noteKey.test(input.key) ||
       typeof input.text !== 'string' ||
       input.text.length > 2000 ||
       typeof input.abnormal !== 'boolean' ||
       !Number.isSafeInteger(input.version) ||
       input.version < 0
     )
-      return json({ error: '备注内容不正确' }, 400);
+      return reply(req, { error: '备注内容不正确' }, 400);
     if (input.abnormal && !input.text.trim())
-      return json({ error: '请填写异常原因' }, 400);
+      return reply(req, { error: '请填写异常原因' }, 400);
     const now = new Date().toISOString();
     const result =
       input.version === 0
@@ -63,8 +66,8 @@ export async function PUT(req: Request) {
             )
             .run();
     if (result.meta.changes !== 1)
-      return json({ error: '备注已被更新，请重新打开后再保存' }, 409);
-    return json({
+      return reply(req, { error: '备注已被更新，请重新打开后再保存' }, 409);
+    return reply(req, {
       note: await db()
         .prepare(
           'SELECT key,text,abnormal,version,updated_at,author FROM notes WHERE key=?',
@@ -73,6 +76,6 @@ export async function PUT(req: Request) {
         .first(),
     });
   } catch {
-    return json({ error: '备注未保存，请稍后重试' }, 503);
+    return reply(req, { error: '备注未保存，请稍后重试' }, 503);
   }
 }
