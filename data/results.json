@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-20T04:14:40Z",
+  "updatedAt": "2026-09-20T07:16:44Z",
   "source": "SparkArena and EgoVLA completed-results snapshot",
   "benchmarks": [
     {
@@ -13376,6 +13376,90 @@
           "actualStep": 70000,
           "rate": 0.02,
           "score": 2,
+          "seen": null,
+          "rollouts": 50,
+          "round": "50680b53593ca8d1"
+        },
+        {
+          "id": "r199141",
+          "modelId": "589b54eb8145d25c",
+          "taskId": "fa9a6d4ac8ddc9dd",
+          "epoch": 60000,
+          "actualStep": 60000,
+          "rate": 0.28,
+          "score": 28,
+          "seen": null,
+          "rollouts": 50,
+          "round": "50680b53593ca8d1"
+        },
+        {
+          "id": "r199162",
+          "modelId": "589b54eb8145d25c",
+          "taskId": "94aaa6b21bae44da",
+          "epoch": 60000,
+          "actualStep": 60000,
+          "rate": 0.04,
+          "score": 12,
+          "seen": null,
+          "rollouts": 50,
+          "round": "50680b53593ca8d1"
+        },
+        {
+          "id": "r199140",
+          "modelId": "589b54eb8145d25c",
+          "taskId": "6f5191440bd633ae",
+          "epoch": 60000,
+          "actualStep": 60000,
+          "rate": 0.58,
+          "score": 67,
+          "seen": null,
+          "rollouts": 50,
+          "round": "50680b53593ca8d1"
+        },
+        {
+          "id": "r199133",
+          "modelId": "589b54eb8145d25c",
+          "taskId": "57a688a344c715b8",
+          "epoch": 60000,
+          "actualStep": 60000,
+          "rate": 0.44,
+          "score": 44,
+          "seen": null,
+          "rollouts": 50,
+          "round": "50680b53593ca8d1"
+        },
+        {
+          "id": "r199159",
+          "modelId": "589b54eb8145d25c",
+          "taskId": "f9b8886e41100699",
+          "epoch": 60000,
+          "actualStep": 60000,
+          "rate": 0.46,
+          "score": 46,
+          "seen": null,
+          "rollouts": 50,
+          "round": "50680b53593ca8d1"
+        },
+        {
+          "id": "r200575",
+          "modelId": "589b54eb8145d25c",
+          "taskId": "b1b914b13d9b7768",
+          "epoch": 60000,
+          "actualStep": 60000,
+          "rate": 0.04,
+          "score": 4,
+          "seen": null,
+          "rollouts": 50,
+          "round": "de2bc9040dbba104"
+        },
+        {
+          "id": "r199185",
+          "modelId": "589b54eb8145d25c",
+          "taskId": "d3499a24d9726eaa",
+          "epoch": 60000,
+          "actualStep": 60000,
+          "rate": 0.4,
+          "score": 44.8,
           "seen": null,
           "rollouts": 50,
           "round": "50680b53593ca8d1"
