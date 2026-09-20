@@ -20,5 +20,6 @@ for(const b of data.benchmarks){
  const raw=JSON.stringify(b);assert.ok(!/\/personal\/|\/mnt\/|root@|checkpoint_path|model_root_path|SBk#|password/i.test(raw),'Private operational fields leaked');
  console.log(b.id,rows.length,'rankings match existing Web selection,',b.records.length,'completed records');
 }
-const e=data.benchmarks.find(b=>b.id==='egovla');const h=e.models.find(m=>m.label==='H-RDT');const drawer=e.tasks.find(t=>t.source==='Humanoid-Stack-Can-Into-Drawer-v0');const record=e.records.find(p=>p.modelId===h.id&&p.taskId===drawer.id&&p.epoch===80000);assert.ok(Math.abs(record.rate-7/66)<1e-12);assert.ok(!ranking(e).some(x=>x.model.policy==='act'));
-console.log('H-RDT restored Unseen score, partial coverage exclusion, weight isolation and publication allowlist passed');
+const s=data.benchmarks.find(b=>b.id==='sparkarena');const actSpark=ranking(s).find(x=>x.model.policy==='act');assert.ok(actSpark&&actSpark.coverage===7,'Merged ACT SparkArena result must cover all seven tasks');
+const e=data.benchmarks.find(b=>b.id==='egovla');const h=e.models.find(m=>m.label==='H-RDT');const drawer=e.tasks.find(t=>t.source==='Humanoid-Stack-Can-Into-Drawer-v0');const record=e.records.find(p=>p.modelId===h.id&&p.taskId===drawer.id&&p.epoch===80000);assert.ok(Math.abs(record.rate-7/66)<1e-12);const actEgo=selectedCells(e).find(x=>x.model.policy==='act');assert.ok(actEgo&&actEgo.coverage===11,'Merged ACT EgoVLA result must remain a single partial model');assert.ok(!ranking(e).some(x=>x.model.policy==='act'),'Partial ACT EgoVLA result must not enter the formal ranking');
+console.log('H-RDT restored Unseen score, ACT grouping, partial coverage exclusion, weight isolation and publication allowlist passed');

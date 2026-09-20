@@ -23,9 +23,11 @@ import { api, hostedOrigin, onGitHub, type Note } from '@/lib/notes-client';
 import {
   data,
   ranking,
+  supplementalRows,
   leaders,
   pct,
   stepLabel,
+  modelWeightLabel,
   displayStep,
   formatResultUpdateTime,
 } from '@/lib/results';
@@ -100,6 +102,7 @@ export default function Dashboard() {
   }
   const bench = data.benchmarks.find((b) => b.id === active)!;
   const rows = useMemo(() => ranking(bench, epoch), [bench, epoch]);
+  const partialRows = useMemo(() => supplementalRows(bench, epoch), [bench, epoch]);
   const wins = useMemo(() => leaders(bench, epoch), [bench, epoch]);
   const filterStepLabel = (n: number) => bench.id === 'sparkarena' && n === 79999
     ? `${stepLabel(n, bench.id, 'pi_05')}（π0.5）`
@@ -109,6 +112,62 @@ export default function Dashboard() {
   );
   const warning = (modelId: string) =>
     notes.some((n) => n.abnormal && n.key.startsWith(`${active}:${modelId}`));
+  const renderScoreRow = (
+    row: (typeof rows)[number],
+    rank: string,
+    supplemental = false,
+  ) => (
+    <TableRow
+      key={row.model.id}
+      className={warning(row.model.id) ? 'abnormal-row' : ''}
+    >
+      <TableCell>
+        <span className="rank">{rank}</span>
+        <strong>
+          {warning(row.model.id) && '⚠️ '}
+          {row.model.label}
+        </strong>
+        <small className="model-version">{row.model.name}</small>
+      </TableCell>
+      <TableCell>
+        {modelWeightLabel(row.model, row.epoch, bench.id)}
+      </TableCell>
+      <TableCell className="average">
+        {pct(row.rate)}
+        {supplemental && (
+          <small className="model-version">
+            已完成 {row.coverage}/{bench.tasks.length} 项
+          </small>
+        )}
+      </TableCell>
+      <TableCell className="note-cell">
+        {notes
+          .filter(
+            (n) => n.key.startsWith(`${active}:${row.model.id}`) && n.text,
+          )
+          .map((n) => (
+            <p key={n.key}>
+              {n.abnormal ? '⚠️ ' : ''}
+              {n.text}
+            </p>
+          ))}
+        <Button
+          variant="ghost"
+          onClick={() =>
+            edit({
+              key: `${active}:${row.model.id}`,
+              title: `${row.model.label} · 模型备注`,
+            })
+          }
+        >
+          ＋ 备注
+        </Button>
+      </TableCell>
+      {row.cells.map((c, j) => (
+        <TableCell key={j}>{pct(c?.rate)}</TableCell>
+      ))}
+    </TableRow>
+  );
   useEffect(() => {
     const context = (
       document as unknown as {
@@ -277,59 +336,30 @@ export default function Dashboard() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {rows.map((row, i) => (
-              <TableRow
-                key={row.model.id}
-                className={warning(row.model.id) ? 'abnormal-row' : ''}
-              >
-                <TableCell>
-                  <span className="rank">{String(i + 1).padStart(2, '0')}</span>
-                  <strong>
-                    {warning(row.model.id) && '⚠️ '}
-                    {row.model.label}
-                  </strong>
-                  <small className="model-version">{row.model.name}</small>
-                </TableCell>
-                <TableCell>{stepLabel(row.epoch, bench.id, row.model.policy)}</TableCell>
-                <TableCell className="average">{pct(row.rate)}</TableCell>
-                <TableCell className="note-cell">
-                  {notes
-                    .filter(
-                      (n) =>
-                        n.key.startsWith(`${active}:${row.model.id}`) && n.text,
-                    )
-                    .map((n) => (
-                      <p key={n.key}>
-                        {n.abnormal ? '⚠️ ' : ''}
-                        {n.text}
-                      </p>
-                    ))}
-                  <Button
-                    variant="ghost"
-                    onClick={() =>
-                      edit({
-                        key: `${active}:${row.model.id}`,
-                        title: `${row.model.label} · 模型备注`,
-                      })
-                    }
-                  >
-                    ＋ 备注
-                  </Button>
-                </TableCell>
-                {row.cells.map((c, j) => (
-                  <TableCell key={j}>{pct(c?.rate)}</TableCell>
-                ))}
-              </TableRow>
-            ))}
+            {rows.map((row, i) =>
+              renderScoreRow(row, String(i + 1).padStart(2, '0')),
+            )}
+            {partialRows.map((row) => renderScoreRow(row, '补充', true))}
           </TableBody>
         </Table>
         <p className="table-hint">
-          当前总榜要求同一模型权重覆盖 7 项正式任务；历史 5 项成绩与当前 7
-          项平均值不能直接比较。
+          当前总榜要求同一模型权重覆盖 {bench.tasks.length} 项正式任务。
         </p>
         <p className="table-hint">
           每种模型选择全任务平均最高的同一权重；各任务等权平均。
         </p>
+        {partialRows.length > 0 && (
+          <p className="table-hint">
+            “补充”行展示已完成任务的平均值，不参与正式排名。
+          </p>
+        )}
+        {bench.models.some(
+          (model) => 'mergedTaskResults' in model && model.mergedTaskResults,
+        ) && (
+          <p className="table-hint">
+            ACT 的按任务测评结果已合并为一个模型；每个任务保留其原始权重。
+          </p>
+        )}
       </section>
       {!rows.length && (
         <div className="empty-state">
@@ -374,7 +404,11 @@ export default function Dashboard() {
                 >
                   {winners.map((w) => {
                     const model = bench.models.find((m) => m.id === w.modelId)!;
-                    const weight = displayStep(w.epoch, bench.id, model.policy);
+                    const weight = displayStep(
+                      w.actualStep,
+                      bench.id,
+                      model.policy,
+                    );
                     return (
                       <li key={w.modelId} className="leader-model">
                         <div className="leader-model-heading">
@@ -384,7 +418,7 @@ export default function Dashboard() {
                           </strong>
                           <span
                             className="weight-badge"
-                            title={`${w.epoch.toLocaleString()} steps`}
+                            title={`${w.actualStep.toLocaleString()} steps`}
                           >
                             {weight >= 10000
                               ? `${+(weight / 10000).toFixed(4)}万轮权重`

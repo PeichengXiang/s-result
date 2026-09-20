@@ -29,6 +29,14 @@ export const stepLabel = (n: number, benchmarkId?: string, policy?: string) => {
   const step = displayStep(n, benchmarkId, policy);
   return step >= 10000 ? `${+(step / 10000).toFixed(4)}w` : `${step.toLocaleString()} steps`;
 };
+export const modelWeightLabel = (
+  model: Model,
+  epoch: number,
+  benchmarkId?: string,
+) =>
+  'weightLabel' in model && typeof model.weightLabel === 'string'
+    ? model.weightLabel
+    : stepLabel(epoch, benchmarkId, model.policy);
 export function better(a: RecordRow, b: RecordRow) {
   return (
     b.rate - a.rate ||
@@ -91,6 +99,17 @@ export function ranking(bench: Benchmark, epoch = 'all') {
     .sort(compare))
     if (!best.has(row.model.policy)) best.set(row.model.policy, row);
   return [...best.values()].sort(compare);
+}
+export function supplementalRows(bench: Benchmark, epoch = 'all') {
+  return selectedCells(bench, epoch)
+    .filter(
+      (row) =>
+        'showPartial' in row.model &&
+        row.model.showPartial === true &&
+        row.coverage > 0 &&
+        row.coverage < bench.tasks.length,
+    )
+    .sort(compare);
 }
 export function leaders(bench: Benchmark, epoch = 'all') {
   return bench.tasks.map((task) => {
