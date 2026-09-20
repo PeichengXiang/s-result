@@ -6,6 +6,7 @@ export type Summary = {
   model: Model;
   epoch: number;
   rate: number;
+  seen: number | null;
   score: number | null;
   cells: (RecordRow | null)[];
   coverage: number;
@@ -84,6 +85,10 @@ export function selectedCells(bench: Benchmark, epoch = 'all') {
       model: bench.models.find((m) => m.id === points[0].modelId)!,
       epoch: points[0].epoch,
       rate: valid.reduce((s, p) => s + p.rate, 0) / valid.length,
+      seen:
+        bench.id === 'egovla' && valid.every((p) => p.seen != null)
+          ? valid.reduce((s, p) => s + p.seen!, 0) / valid.length
+          : null,
       score: valid.every((x) => x.score != null)
         ? valid.reduce((s, x) => s + x.score!, 0) / valid.length
         : null,

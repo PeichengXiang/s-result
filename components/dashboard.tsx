@@ -76,6 +76,7 @@ export default function Dashboard() {
     }
   }
   const bench = data.benchmarks.find((b) => b.id === active)!;
+  const isEgoVLA = bench.id === 'egovla';
   const rows = useMemo(() => ranking(bench, epoch), [bench, epoch]);
   const partialRows = useMemo(() => supplementalRows(bench, epoch), [bench, epoch]);
   const wins = useMemo(() => leaders(bench, epoch), [bench, epoch]);
@@ -115,6 +116,11 @@ export default function Dashboard() {
           </small>
         )}
       </TableCell>
+      {isEgoVLA && (
+        <TableCell className="average seen-average">
+          {pct(row.seen)}
+        </TableCell>
+      )}
       <TableCell className="note-cell">
         {notes
           .filter(
@@ -139,7 +145,16 @@ export default function Dashboard() {
         </Button>
       </TableCell>
       {row.cells.map((c, j) => (
-        <TableCell key={j}>{pct(c?.rate)}</TableCell>
+        <TableCell key={j} className={isEgoVLA ? 'task-score' : undefined}>
+          {isEgoVLA ? (
+            <>
+              <span>{pct(c?.rate)}</span>
+              <small>Seen {pct(c?.seen)}</small>
+            </>
+          ) : (
+            pct(c?.rate)
+          )}
+        </TableCell>
       ))}
     </TableRow>
   );
@@ -191,7 +206,11 @@ export default function Dashboard() {
               models: ranking(
                 b,
                 v.epoch === undefined ? 'all' : String(v.epoch),
-              ).map((r) => ({ name: r.model.label, successRate: r.rate })),
+              ).map((r) => ({
+                name: r.model.label,
+                unseenSuccessRate: r.rate,
+                ...(b.id === 'egovla' ? { seenSuccessRate: r.seen } : {}),
+              })),
             };
           },
         },
@@ -298,7 +317,8 @@ export default function Dashboard() {
             <TableRow>
               <TableHead>排名 / 模型</TableHead>
               <TableHead>权重</TableHead>
-              <TableHead>平均成功率</TableHead>
+              <TableHead>{isEgoVLA ? 'Unseen SR（排名）' : '平均成功率'}</TableHead>
+              {isEgoVLA && <TableHead>Seen SR</TableHead>}
               <TableHead>备注</TableHead>
               {bench.tasks.map((t) => (
                 <TableHead key={t.id} className="task-column" title={t.source}>
@@ -306,6 +326,7 @@ export default function Dashboard() {
                   <small className="task-english" lang="en">
                     {t.short.replaceAll('-', ' ')}
                   </small>
+                  {isEgoVLA && <small className="task-metric">Unseen / Seen</small>}
                 </TableHead>
               ))}
             </TableRow>
@@ -321,7 +342,9 @@ export default function Dashboard() {
           当前总榜要求同一模型权重覆盖 {bench.tasks.length} 项正式任务。
         </p>
         <p className="table-hint">
-          每种模型选择全任务平均最高的同一权重；各任务等权平均。
+          {isEgoVLA
+            ? 'Unseen SR 用于排名；Seen SR 同时公开，仅供对比。两个指标均按任务等权平均。'
+            : '每种模型选择全任务平均最高的同一权重；各任务等权平均。'}
         </p>
         {partialRows.length > 0 && (
           <p className="table-hint">
@@ -345,7 +368,11 @@ export default function Dashboard() {
       <section className="leader-section">
         <div className="section-head">
           <h2>各任务，谁在领先</h2>
-          <span>单任务最佳成功率 · 可来自不同权重</span>
+          <span>
+            {isEgoVLA
+              ? '单任务最佳 Unseen SR · 同时展示 Seen SR'
+              : '单任务最佳成功率 · 可来自不同权重'}
+          </span>
         </div>
         <div className="leaders-grid">
           {wins.map(({ task, rate, winners }, i) => (
@@ -365,7 +392,9 @@ export default function Dashboard() {
                     ? '暂无成功记录'
                     : rate == null
                       ? '暂无成绩'
-                      : '最佳成功率'}
+                      : isEgoVLA
+                        ? '最佳 Unseen SR'
+                        : '最佳成功率'}
                 </span>
                 <b>{pct(rate)}</b>
               </div>
@@ -400,6 +429,11 @@ export default function Dashboard() {
                               : `${weight.toLocaleString()}轮权重`}
                           </span>
                         </div>
+                        {isEgoVLA && (
+                          <small className="leader-seen">
+                            Seen SR {pct(w.seen)}
+                          </small>
+                        )}
                         <small className="model-version">{model.name}</small>
                       </li>
                     );
@@ -429,7 +463,7 @@ export default function Dashboard() {
         <b>{bench.metric}</b>
         <p>
           {active === 'egovla'
-            ? '排名使用 Unseen 66 回合成功率，全部 93 回合用于判断测评是否完成。'
+            ? 'EgoVLA 同时展示 Unseen（66 回合）和 Seen（27 回合）成功率；排名仅使用 Unseen，全部 93 回合用于判断测评是否完成。'
             : `SparkArena 总榜沿用评测 Web 的 ${bench.tasks.length} 项正式任务和目标回合数。`}{' '}
           同一模型、同一权重的各任务取最新完成的单次评测，再比较各权重的任务等权平均；整组均为零分时，逐层回退到更早记录，仍须任务齐全。{' '}
           单任务零成功率仍是有效成绩；缺失成绩显示为
