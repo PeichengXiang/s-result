@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-23T04:55:30Z",
+  "updatedAt": "2026-09-23T13:50:56Z",
   "source": "SparkArena and EgoVLA completed-results snapshot",
   "benchmarks": [
     {
@@ -437,6 +437,12 @@
           "policy": "spark_0",
           "label": "Spark 0",
           "name": "spark_pretrain_pretrain_stats_bs96_10w [bread instruction]"
+        },
+        {
+          "id": "83c73828351d6c19",
+          "policy": "egovla",
+          "label": "EgoVLA",
+          "name": "egovla_0923_SparkArena"
         }
       ],
       "records": [
@@ -16375,6 +16381,66 @@
           "seen": null,
           "rollouts": 50,
           "round": "8e55f55e55f3bbee"
+        },
+        {
+          "id": "r273593",
+          "modelId": "83c73828351d6c19",
+          "taskId": "94aaa6b21bae44da",
+          "epoch": 80000,
+          "actualStep": 80000,
+          "rate": 0,
+          "score": 4.6,
+          "seen": null,
+          "rollouts": 50,
+          "round": "91d0cb67a5e9b521"
+        },
+        {
+          "id": "r273594",
+          "modelId": "83c73828351d6c19",
+          "taskId": "fa9a6d4ac8ddc9dd",
+          "epoch": 80000,
+          "actualStep": 80000,
+          "rate": 0,
+          "score": 0,
+          "seen": null,
+          "rollouts": 50,
+          "round": "91d0cb67a5e9b521"
+        },
+        {
+          "id": "r273660",
+          "modelId": "83c73828351d6c19",
+          "taskId": "f9b8886e41100699",
+          "epoch": 80000,
+          "actualStep": 80000,
+          "rate": 0.16,
+          "score": 16,
+          "seen": null,
+          "rollouts": 50,
+          "round": "91d0cb67a5e9b521"
+        },
+        {
+          "id": "r273670",
+          "modelId": "83c73828351d6c19",
+          "taskId": "57a688a344c715b8",
+          "epoch": 80000,
+          "actualStep": 80000,
+          "rate": 0.14,
+          "score": 14.000000000000002,
+          "seen": null,
+          "rollouts": 50,
+          "round": "91d0cb67a5e9b521"
+        },
+        {
+          "id": "r273718",
+          "modelId": "83c73828351d6c19",
+          "taskId": "6f5191440bd633ae",
+          "epoch": 80000,
+          "actualStep": 80000,
+          "rate": 0.08,
+          "score": 14.599999999999996,
+          "seen": null,
+          "rollouts": 50,
+          "round": "91d0cb67a5e9b521"
         }
       ],
       "referenceRanking": [
