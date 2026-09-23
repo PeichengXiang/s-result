@@ -370,6 +370,51 @@ h2 {
   padding-top: 11px !important;
   padding-bottom: 11px !important;
 }
+.egovla-overall {
+  margin-top: 16px;
+}
+.egovla-overall > .section-head {
+  align-items: flex-start;
+}
+.egovla-overall > .section-head > div {
+  min-width: 0;
+}
+.egovla-overall h1 {
+  font-size: 22px;
+  letter-spacing: -0.025em;
+  margin: 0;
+  line-height: 1.4;
+}
+.egovla-setting-grid {
+  display: grid;
+  gap: 28px;
+}
+.egovla-setting-table {
+  min-width: 0;
+}
+.egovla-setting-table .section-head {
+  margin-bottom: 10px;
+}
+.egovla-setting-table h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 680;
+}
+.egovla-setting-table td:first-child,
+.egovla-setting-table th:first-child {
+  min-width: 210px;
+}
+.egovla-setting-table td:nth-child(2),
+.egovla-setting-table th:nth-child(2) {
+  min-width: 235px;
+}
+.egovla-setting-table .model-version {
+  max-width: 320px;
+  white-space: normal;
+}
+.egovla-setting-table .task-score {
+  min-width: 116px;
+}
 .leader-section {
   margin-top: 40px;
 }

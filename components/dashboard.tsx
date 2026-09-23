@@ -30,7 +30,212 @@ import {
   modelWeightLabel,
   displayStep,
   formatResultUpdateTime,
+  egoVlaLeaderboard,
+  egoVlaSetting,
+  egoVlaTaskGroups,
+  type EgoHorizon,
+  type EgoSplit,
+  type Benchmark,
 } from '@/lib/results';
+
+function EgoSettingTables({
+  bench,
+  epoch,
+  notes,
+  edit,
+  warning,
+}: {
+  bench: Benchmark;
+  epoch: string;
+  notes: Note[];
+  edit: (target: EditTarget) => void;
+  warning: (modelId: string) => boolean;
+}) {
+  const groups = egoVlaTaskGroups(bench);
+  const configuredSettings = new Map([
+    ['act', 'ACT'],
+    ['spark_no_pretrain', 'Spark(no pretrain)'],
+    ['spark_visual_pretrain', 'Spark(visual pretrain)'],
+    ['spark_tactile_100h_pretrain', 'Spark(tactile-100h pretrain)'],
+    ['spark_tactile_full_pretrain', 'Spark(tactile-full pretrain)'],
+    ['spark_inspire', 'Spark(inspire)'],
+  ]);
+  for (const model of bench.models) {
+    const setting = egoVlaSetting(model);
+    configuredSettings.set(setting.key, setting.label);
+  }
+
+  const renderTable = (horizon: EgoHorizon, split: EgoSplit) => {
+    const tasks = groups[horizon];
+    const rows = egoVlaLeaderboard(bench, horizon, split, epoch).filter(
+      (row) => row.rate > 0,
+    );
+    const bySetting = new Map(rows.map((row) => [row.setting.key, row]));
+    const ordered = [
+      ...rows,
+      ...[...configuredSettings.entries()]
+        .filter(([key]) => !bySetting.has(key))
+        .map(([key, label]) => ({
+          setting: { key, label },
+          model: null,
+          epoch: null,
+          cells: tasks.map(() => null),
+          rate: null,
+          psr: null,
+          coverage: 0,
+        })),
+    ];
+    return (
+      <div className="egovla-setting-table" key={`${horizon}-${split}`}>
+        <div className="section-head">
+          <h3>
+            {split === 'seen' ? 'Seen' : 'Unseen'} ·{' '}
+            {horizon === 'short' ? 'Short horizon（7 tasks）' : 'Long horizon（5 tasks）'}
+          </h3>
+          <span>按 {split === 'seen' ? 'Seen' : 'Unseen'} SR 排名</span>
+        </div>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>排名 / Setting</TableHead>
+              <TableHead>模型 / 权重</TableHead>
+              <TableHead>备注</TableHead>
+              <TableHead>Mean SR</TableHead>
+              <TableHead>Mean PSR</TableHead>
+              {tasks.map((task) => (
+                <TableHead key={task.id} className="task-column" title={task.source}>
+                  <span>{task.label}</span>
+                  <small className="task-english" lang="en">
+                    {task.short.replaceAll('-', ' ')}
+                  </small>
+                  <small className="task-metric">SR / PSR</small>
+                </TableHead>
+              ))}
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {ordered.map((row, index) => {
+              const model = row.model;
+              const isPlaceholder = !model;
+              return (
+                <TableRow
+                  key={`${split}-${horizon}-${row.setting.key}`}
+                  className={model && warning(model.id) ? 'abnormal-row' : ''}
+                >
+                  <TableCell>
+                    <span className="rank">
+                      {isPlaceholder ? '—' : String(index + 1).padStart(2, '0')}
+                    </span>
+                    <strong>{row.setting.label}</strong>
+                  </TableCell>
+                  <TableCell>
+                    {model ? (
+                      <>
+                        <strong>{model.label}</strong>
+                        <small className="model-version">
+                          {model.name} · {modelWeightLabel(model, row.epoch!, bench.id)}
+                        </small>
+                      </>
+                    ) : (
+                      <span className="model-version">暂无完整评测</span>
+                    )}
+                  </TableCell>
+                  <TableCell className="note-cell">
+                    {model &&
+                      notes
+                        .filter(
+                          (note) =>
+                            note.key.startsWith(`${bench.id}:${model.id}`) &&
+                            note.text,
+                        )
+                        .map((note) => (
+                          <p key={note.key}>
+                            {note.abnormal ? '⚠️ ' : ''}
+                            {note.text}
+                          </p>
+                        ))}
+                    {model && (
+                      <Button
+                        variant="ghost"
+                        onClick={() =>
+                          edit({
+                            key: `${bench.id}:${model.id}`,
+                            title: `${model.label} · ${row.setting.label} 备注`,
+                          })
+                        }
+                      >
+                        ＋ 备注
+                      </Button>
+                    )}
+                  </TableCell>
+                  <TableCell className="average">
+                    {row.rate == null ? '—' : pct(row.rate)}
+                  </TableCell>
+                  <TableCell className="average seen-average">
+                    {row.psr == null ? '—' : pct(row.psr)}
+                  </TableCell>
+                  {row.cells.map((cell, taskIndex) => {
+                    const point = cell as (typeof cell) & {
+                      psrSeen?: number | null;
+                      psrUnseen?: number | null;
+                    };
+                    const value = point
+                      ? split === 'seen'
+                        ? point.seen
+                        : point.rate
+                      : null;
+                    const psr = point
+                      ? split === 'seen'
+                        ? point.psrSeen
+                        : point.psrUnseen
+                      : null;
+                    return (
+                      <TableCell key={tasks[taskIndex]?.id ?? taskIndex} className="task-score">
+                        {isPlaceholder ? (
+                          '—'
+                        ) : (
+                          <>
+                            <span>{pct(value)}</span>
+                            <small>PSR {pct(psr)}</small>
+                          </>
+                        )}
+                      </TableCell>
+                    );
+                  })}
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </div>
+    );
+  };
+
+  return (
+    <section id="overall" className="table-section egovla-overall">
+      <div className="section-head">
+        <div>
+          <h1>{bench.name} · 总评测表</h1>
+          <p className="table-hint">
+            与 eval web 一致：短程 / 长程分别报告 Seen、Unseen；每个 setting 内按任务逐项选择最佳完整测评，再按 Mean SR 排名。
+          </p>
+        </div>
+        <a href="#method">
+          统计口径 <ArrowDown size={14} />
+        </a>
+      </div>
+      <div className="egovla-setting-grid">
+        {renderTable('short', 'seen')}
+        {renderTable('short', 'unseen')}
+        {renderTable('long', 'seen')}
+        {renderTable('long', 'unseen')}
+      </div>
+      <p className="table-hint">
+        PSR 使用快照中的 release-v7 指标；旧记录没有该字段时保留空值。0 分的 setting 不进入排名，但仍保留 setting 行以说明当前没有可展示的完整成绩。
+      </p>
+    </section>
+  );
+}
 
 export default function Dashboard() {
   const [active, setActive] = useState('sparkarena');
@@ -305,6 +510,15 @@ export default function Dashboard() {
           <span>请结合表格备注解读相关成绩。</span>
         </div>
       )}
+      {isEgoVLA ? (
+        <EgoSettingTables
+          bench={bench}
+          epoch={epoch}
+          notes={notes}
+          edit={edit}
+          warning={warning}
+        />
+      ) : (
       <section id="overall" className="table-section">
         <div className="section-head">
           <h1>{bench.name} · 总成绩</h1>
@@ -359,7 +573,8 @@ export default function Dashboard() {
           </p>
         )}
       </section>
-      {!rows.length && (
+      )}
+      {!rows.length && !isEgoVLA && (
         <div className="empty-state">
           当前权重尚无覆盖全部 {bench.tasks.length}{' '}
           个任务的模型，请选择其他权重范围。
@@ -463,9 +678,11 @@ export default function Dashboard() {
         <b>{bench.metric}</b>
         <p>
           {active === 'egovla'
-            ? 'EgoVLA 同时展示 Unseen（66 回合）和 Seen（27 回合）成功率；排名仅使用 Unseen，全部 93 回合用于判断测评是否完成。'
+            ? 'EgoVLA 按 eval web 的短程 7 项、长程 5 项分别展示 Seen 与 Unseen；每个模型权重按任务选择对应 split 的最佳完整测评，setting 内按 Mean SR 排名，PSR 作为同分比较。'
             : `SparkArena 总榜沿用评测 Web 的 ${bench.tasks.length} 项正式任务和目标回合数。`}{' '}
-          同一模型、同一权重的各任务取最新完成的单次评测，再比较各权重的任务等权平均；整组均为零分时，逐层回退到更早记录，仍须任务齐全。{' '}
+          {active === 'egovla'
+            ? '每个任务仍按原始成绩保留 Seen / Unseen 两个指标，缺失值显示为 —。'
+            : '同一模型、同一权重的各任务取最新完成的单次评测，再比较各权重的任务等权平均；整组均为零分时，逐层回退到更早记录，仍须任务齐全。'}{' '}
           单任务零成功率仍是有效成绩；缺失成绩显示为
           —。
         </p>
