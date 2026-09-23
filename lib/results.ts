@@ -187,25 +187,37 @@ export function egoVlaTaskGroups(bench: Benchmark) {
   return { short, long };
 }
 
-/** Match the eval Web's Spark setting buckets for EgoVLA. */
+/**
+ * These are the same explicit model-name buckets used by eval web's
+ * `sparkSettingPolicyKey`.  Keep this list-based mapping instead of inferring
+ * a setting from a substring in the display name: new/experimental model
+ * names must stay in eval web's `no pretrain` bucket until eval web assigns
+ * them explicitly.
+ */
+const EGO_VISUAL_PRETRAIN_MODELS = new Set([
+  'egovla_spark_visual_pretrain',
+]);
+const EGO_TACTILE_100H_PRETRAIN_MODELS = new Set([
+  'egovla_spark_tactile100h_pretrain',
+]);
+const EGO_INSPIRE_MODELS = new Set([
+  'spark0-0914-inspire12-egovla',
+]);
+
+/** Match eval web's exact Spark setting buckets for EgoVLA. */
 export function egoVlaSetting(model: Model): EgoSetting {
   const policy = model.policy.toLowerCase();
   if (policy === 'act') return { key: 'act', label: 'ACT' };
   if (policy === 'spark_0') {
     const name = model.name.toLowerCase();
-    if (name.includes('visual'))
+    if (EGO_VISUAL_PRETRAIN_MODELS.has(name))
       return { key: 'spark_visual_pretrain', label: 'Spark(visual pretrain)' };
-    if (name.includes('tactile-full') || name.includes('tactile_full'))
-      return {
-        key: 'spark_tactile_full_pretrain',
-        label: 'Spark(tactile-full pretrain)',
-      };
-    if (name.includes('tactile'))
+    if (EGO_TACTILE_100H_PRETRAIN_MODELS.has(name))
       return {
         key: 'spark_tactile_100h_pretrain',
         label: 'Spark(tactile-100h pretrain)',
       };
-    if (name.includes('inspire'))
+    if (EGO_INSPIRE_MODELS.has(name))
       return { key: 'spark_inspire', label: 'Spark(inspire)' };
     return { key: 'spark_no_pretrain', label: 'Spark(no pretrain)' };
   }
