@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-29T19:13:16.6987536Z",
+  "updatedAt": "2026-09-29T22:11:02.6766990Z",
   "source": "SparkArena and EgoVLA completed-results snapshot",
   "benchmarks": [
     {
@@ -18919,6 +18919,78 @@
           "seen": null,
           "rollouts": 50,
           "round": "ed60b513d4ff1142"
+        },
+        {
+          "id": "r366845",
+          "modelId": "1a1283f1bb1208a7",
+          "taskId": "d3499a24d9726eaa",
+          "epoch": 50000,
+          "actualStep": 50000,
+          "rate": 0,
+          "score": 2.1,
+          "seen": null,
+          "rollouts": 50,
+          "round": "3198224fc7768db7"
+        },
+        {
+          "id": "r366853",
+          "modelId": "2f96f29d78c574b7",
+          "taskId": "94aaa6b21bae44da",
+          "epoch": 30000,
+          "actualStep": 30000,
+          "rate": 0.12,
+          "score": 25.300000000000004,
+          "seen": null,
+          "rollouts": 50,
+          "round": "4ae50eccb5ccba87"
+        },
+        {
+          "id": "r366938",
+          "modelId": "2f96f29d78c574b7",
+          "taskId": "d3499a24d9726eaa",
+          "epoch": 30000,
+          "actualStep": 30000,
+          "rate": 0.16,
+          "score": 22.90000000000001,
+          "seen": null,
+          "rollouts": 50,
+          "round": "9a0b7f6c8d36e358"
+        },
+        {
+          "id": "r367154",
+          "modelId": "2f96f29d78c574b7",
+          "taskId": "b1b914b13d9b7768",
+          "epoch": 50000,
+          "actualStep": 50000,
+          "rate": 0.02,
+          "score": 2,
+          "seen": null,
+          "rollouts": 50,
+          "round": "b4f52439d6b55892"
+        },
+        {
+          "id": "r367397",
+          "modelId": "4221c7ee631eb9c3",
+          "taskId": "57a688a344c715b8",
+          "epoch": 30000,
+          "actualStep": 30000,
+          "rate": 0.44,
+          "score": 44,
+          "seen": null,
+          "rollouts": 50,
+          "round": "754c1e5e3b9871d5"
+        },
+        {
+          "id": "r367398",
+          "modelId": "4221c7ee631eb9c3",
+          "taskId": "94aaa6b21bae44da",
+          "epoch": 30000,
+          "actualStep": 30000,
+          "rate": 0.54,
+          "score": 69.89999999999996,
+          "seen": null,
+          "rollouts": 50,
+          "round": "e7efefc834a556fd"
         }
       ],
       "referenceRanking": [
