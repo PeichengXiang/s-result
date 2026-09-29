@@ -53,16 +53,18 @@ function EgoSettingTables({
 }) {
   const groups = egoVlaTaskGroups(bench);
   const configuredSettings = new Map([
-    ['act', 'ACT'],
-    ['spark_no_pretrain', 'Spark(no pretrain)'],
+    ['spark_inspire', 'Spark(inspire)'],
+    ['spark_no_pretrain', 'Spark(wuji,no pretrain)'],
     ['spark_visual_pretrain', 'Spark(visual pretrain)'],
     ['spark_tactile_100h_pretrain', 'Spark(tactile-100h pretrain)'],
     ['spark_tactile_full_pretrain', 'Spark(tactile-full pretrain)'],
-    ['spark_inspire', 'Spark(inspire)'],
+    ['starvla', 'StarVLA'],
+    ['act', 'ACT'],
   ]);
   for (const model of bench.models) {
     const setting = egoVlaSetting(model);
-    configuredSettings.set(setting.key, setting.label);
+    if (setting.key !== 'spark_unclassified')
+      configuredSettings.set(setting.key, setting.label);
   }
 
   const renderTable = (horizon: EgoHorizon, split: EgoSplit) => {

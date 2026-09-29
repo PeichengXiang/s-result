@@ -10,7 +10,7 @@
 - EgoVLA 为 12 项 humanoid 任务，每次 93 回合（Seen 27 / Unseen 66）。总评测表按 eval web 的 Short（7 项）/ Long（5 项）拆成四个配置：Short-Seen、Short-Unseen、Long-Seen、Long-Unseen；每个配置内按任务逐项选择同一模型、同一权重的最佳完整测评，再按 Mean SR 排名，release-v7 PSR 作为同分比较并同时展示。
 - 原始数据与筛选沿用实际 checkpoint 步数。SparkArena 的 π0.5 79999 权重显示为 8w，筛选项标为“8w（π0.5）”以区别实际 80000 的选项；不改写原始权重或成绩。
 - 总榜每模型类型使用同一权重的全任务等权平均最高值。SparkArena 与当前评测 Web 总榜一致：同一模型、同一权重下，每个任务取结果 ID 最新的完整单次；更新的独立重测可以替换旧完整批次中的对应任务。若这一整层任务全部为 0 分，则剥掉整层后按相同规则选择更早记录，仍须七任务齐全；单个任务的 0 分不会单独回退。
-- EgoVLA 的 setting 分组完全沿用 eval web：Spark 细分为 no pretrain、visual pretrain、tactile-100h pretrain、tactile-full pretrain、inspire，ACT 作为一个模型行，其余策略按策略名合并。没有完整配置或 Mean SR 为 0 的 setting 不进入排名，但会保留空行提示。
+- EgoVLA 的 setting 分组完全沿用 eval web：Spark 细分为 wuji/no pretrain、Inspire、visual pretrain、tactile-100h pretrain、tactile-full pretrain，StarVLA 单独成行，ACT 作为一个模型行，其余策略按策略名合并。没有完整配置或 Mean SR 为 0 的 setting 不进入排名，但会保留空行提示。
 - 表格后面的图展示各任务最佳完整单次，可能来自不同权重，与总榜口径有意区分。低分或 0 分不会自动标记异常。
 - 这是本项目测评成绩，不是 benchmark 原作者的官方排行榜。历史测评可能使用不同适配版本；请结合人工备注解读。
 - ACT 的 SparkArena 与 EgoVLA 成绩已公开；同一 ACT 模型的分任务测评会合并展示为一个模型。SparkArena 计入完整总榜；EgoVLA 在四个 Short/Long × Seen/Unseen 配置中按同一 ACT 行展示。

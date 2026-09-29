@@ -189,19 +189,32 @@ export function egoVlaTaskGroups(bench: Benchmark) {
 
 /**
  * These are the same explicit model-name buckets used by eval web's
- * `sparkSettingPolicyKey`.  Keep this list-based mapping instead of inferring
- * a setting from a substring in the display name: new/experimental model
- * names must stay in eval web's `no pretrain` bucket until eval web assigns
- * them explicitly.
+ * `sparkSettingPolicyKey`. Keep this list-based mapping instead of inferring
+ * a setting from a broad training-name substring: new/experimental model
+ * names stay unclassified until eval web assigns them explicitly.
  */
+const EGO_NO_PRETRAIN_MODELS = new Set([
+  // eval web's formal no-pretrain row is currently backed by the 0912 weight.
+  'spark0-0912-egovla',
+]);
 const EGO_VISUAL_PRETRAIN_MODELS = new Set([
   'egovla_spark_visual_pretrain',
+  '0920_egovla_spark_visual_pretrain_pstats',
+  '0923_egovla_spark_visual_pretrain_pstats',
 ]);
 const EGO_TACTILE_100H_PRETRAIN_MODELS = new Set([
   'egovla_spark_tactile100h_pretrain',
+  'egovla_spark_tactile100h_pretrain_stats',
+]);
+const EGO_TACTILE_FULL_PRETRAIN_MODELS = new Set([
+  'egovla_spark_tactile0913_pretrain',
+  'egovla_spark_tactile0913_no_pretrain_stats',
 ]);
 const EGO_INSPIRE_MODELS = new Set([
   'spark0-0914-inspire12-egovla',
+]);
+const EGO_STARVLA_MODELS = new Set([
+  'starvla_0922_egovlabenchmark',
 ]);
 
 /** Match eval web's exact Spark setting buckets for EgoVLA. */
@@ -210,6 +223,8 @@ export function egoVlaSetting(model: Model): EgoSetting {
   if (policy === 'act') return { key: 'act', label: 'ACT' };
   if (policy === 'spark_0') {
     const name = model.name.toLowerCase();
+    if (EGO_STARVLA_MODELS.has(name) || name.includes('starvla'))
+      return { key: 'starvla', label: 'StarVLA' };
     if (EGO_VISUAL_PRETRAIN_MODELS.has(name))
       return { key: 'spark_visual_pretrain', label: 'Spark(visual pretrain)' };
     if (EGO_TACTILE_100H_PRETRAIN_MODELS.has(name))
@@ -217,9 +232,18 @@ export function egoVlaSetting(model: Model): EgoSetting {
         key: 'spark_tactile_100h_pretrain',
         label: 'Spark(tactile-100h pretrain)',
       };
+    if (EGO_TACTILE_FULL_PRETRAIN_MODELS.has(name))
+      return {
+        key: 'spark_tactile_full_pretrain',
+        label: 'Spark(tactile-full pretrain)',
+      };
     if (EGO_INSPIRE_MODELS.has(name))
       return { key: 'spark_inspire', label: 'Spark(inspire)' };
-    return { key: 'spark_no_pretrain', label: 'Spark(no pretrain)' };
+    if (EGO_NO_PRETRAIN_MODELS.has(name))
+      return { key: 'spark_no_pretrain', label: 'Spark(wuji,no pretrain)' };
+    // Keep newly uploaded/unclassified checkpoints out of the formal setting
+    // rows until eval web assigns them a deliberate category.
+    return { key: 'spark_unclassified', label: 'Spark(unclassified)' };
   }
   return { key: policy, label: model.label };
 }
@@ -308,8 +332,10 @@ export function egoVlaLeaderboard(
     const finitePsrs = psrs.filter(
       (value): value is number => typeof value === 'number',
     );
+    const setting = egoVlaSetting(model);
+    if (setting.key === 'spark_unclassified') continue;
     candidates.push({
-      setting: egoVlaSetting(model),
+      setting,
       model,
       epoch: points[0].epoch,
       cells: enrichedCells,
