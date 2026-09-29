@@ -221,6 +221,7 @@ const EGO_STARVLA_MODELS = new Set([
 export function egoVlaSetting(model: Model): EgoSetting {
   const policy = model.policy.toLowerCase();
   if (policy === 'act') return { key: 'act', label: 'ACT' };
+  if (policy === 'starvla') return { key: 'starvla', label: 'StarVLA' };
   if (policy === 'spark_0') {
     const name = model.name.toLowerCase();
     if (EGO_STARVLA_MODELS.has(name) || name.includes('starvla'))
