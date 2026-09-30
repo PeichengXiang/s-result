@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-29T22:11:02.6766990Z",
+  "updatedAt": "2026-09-30T09:58:23.1892553Z",
   "source": "SparkArena and EgoVLA completed-results snapshot",
   "benchmarks": [
     {
@@ -461,6 +461,12 @@
           "policy": "spark_0",
           "label": "Spark 0",
           "name": "0924_spark_pretrain_tactile_full"
+        },
+        {
+          "id": "8a78986c3db58e01",
+          "policy": "spark_0",
+          "label": "Spark 0",
+          "name": "spark_tactile_full_pretrain_30w"
         }
       ],
       "records": [
@@ -18991,6 +18997,246 @@
           "seen": null,
           "rollouts": 50,
           "round": "e7efefc834a556fd"
+        },
+        {
+          "id": "r365288",
+          "modelId": "83c73828351d6c19",
+          "taskId": "b1b914b13d9b7768",
+          "epoch": 50000,
+          "actualStep": 50000,
+          "rate": 0,
+          "score": 0,
+          "seen": null,
+          "rollouts": 50,
+          "round": "a2f70cc7b2f3f7a8"
+        },
+        {
+          "id": "r371032",
+          "modelId": "adf3a3df1f7aeec0",
+          "taskId": "57a688a344c715b8",
+          "epoch": 50000,
+          "actualStep": 50000,
+          "rate": 0.28,
+          "score": 28.000000000000004,
+          "seen": null,
+          "rollouts": 50,
+          "round": "8be922270b4db22b"
+        },
+        {
+          "id": "r371033",
+          "modelId": "41f97937e177816e",
+          "taskId": "57a688a344c715b8",
+          "epoch": 30000,
+          "actualStep": 30000,
+          "rate": 0.42,
+          "score": 42,
+          "seen": null,
+          "rollouts": 50,
+          "round": "e72e0dfd8b9dddcb"
+        },
+        {
+          "id": "r371038",
+          "modelId": "4032bb5ea24422a2",
+          "taskId": "f9b8886e41100699",
+          "epoch": 50000,
+          "actualStep": 50000,
+          "rate": 0.02,
+          "score": 2,
+          "seen": null,
+          "rollouts": 50,
+          "round": "4f585712cc58d356"
+        },
+        {
+          "id": "r371039",
+          "modelId": "69119ceadebbc776",
+          "taskId": "f9b8886e41100699",
+          "epoch": 50000,
+          "actualStep": 50000,
+          "rate": 0.32,
+          "score": 32,
+          "seen": null,
+          "rollouts": 50,
+          "round": "69c72a490835b433"
+        },
+        {
+          "id": "r371043",
+          "modelId": "e168ebe49130d070",
+          "taskId": "94aaa6b21bae44da",
+          "epoch": 50000,
+          "actualStep": 50000,
+          "rate": 0.04,
+          "score": 14.900000000000002,
+          "seen": null,
+          "rollouts": 50,
+          "round": "6d8d625765900287"
+        },
+        {
+          "id": "r371044",
+          "modelId": "e168ebe49130d070",
+          "taskId": "fa9a6d4ac8ddc9dd",
+          "epoch": 50000,
+          "actualStep": 50000,
+          "rate": 0.08,
+          "score": 8,
+          "seen": null,
+          "rollouts": 50,
+          "round": "6727fc2b93236d41"
+        },
+        {
+          "id": "r371050",
+          "modelId": "adf3a3df1f7aeec0",
+          "taskId": "d3499a24d9726eaa",
+          "epoch": 50000,
+          "actualStep": 50000,
+          "rate": 0,
+          "score": 5.999999999999998,
+          "seen": null,
+          "rollouts": 50,
+          "round": "65e1542aa99d779a"
+        },
+        {
+          "id": "r371055",
+          "modelId": "69119ceadebbc776",
+          "taskId": "d3499a24d9726eaa",
+          "epoch": 50000,
+          "actualStep": 50000,
+          "rate": 0.3,
+          "score": 37.2,
+          "seen": null,
+          "rollouts": 50,
+          "round": "28f4d46dbc52f69f"
+        },
+        {
+          "id": "r371057",
+          "modelId": "adf3a3df1f7aeec0",
+          "taskId": "b1b914b13d9b7768",
+          "epoch": 50000,
+          "actualStep": 50000,
+          "rate": 0,
+          "score": 0,
+          "seen": null,
+          "rollouts": 50,
+          "round": "9fdd12982db8e878"
+        },
+        {
+          "id": "r371058",
+          "modelId": "e168ebe49130d070",
+          "taskId": "b1b914b13d9b7768",
+          "epoch": 50000,
+          "actualStep": 50000,
+          "rate": 0,
+          "score": 0,
+          "seen": null,
+          "rollouts": 50,
+          "round": "90476a067f9354c4"
+        },
+        {
+          "id": "r371059",
+          "modelId": "4032bb5ea24422a2",
+          "taskId": "b1b914b13d9b7768",
+          "epoch": 50000,
+          "actualStep": 50000,
+          "rate": 0,
+          "score": 0,
+          "seen": null,
+          "rollouts": 50,
+          "round": "f702f0a574e9b48e"
+        },
+        {
+          "id": "r371060",
+          "modelId": "69119ceadebbc776",
+          "taskId": "b1b914b13d9b7768",
+          "epoch": 50000,
+          "actualStep": 50000,
+          "rate": 0.02,
+          "score": 2,
+          "seen": null,
+          "rollouts": 50,
+          "round": "73cf405a339e41a8"
+        },
+        {
+          "id": "r371066",
+          "modelId": "69119ceadebbc776",
+          "taskId": "6f5191440bd633ae",
+          "epoch": 50000,
+          "actualStep": 50000,
+          "rate": 0.4,
+          "score": 52.600000000000016,
+          "seen": null,
+          "rollouts": 50,
+          "round": "1cbdbc3da8b5e246"
+        },
+        {
+          "id": "r371069",
+          "modelId": "69119ceadebbc776",
+          "taskId": "fa9a6d4ac8ddc9dd",
+          "epoch": 50000,
+          "actualStep": 50000,
+          "rate": 0.28,
+          "score": 28.000000000000004,
+          "seen": null,
+          "rollouts": 50,
+          "round": "e197d86acf4b967e"
+        },
+        {
+          "id": "r371099",
+          "modelId": "69119ceadebbc776",
+          "taskId": "57a688a344c715b8",
+          "epoch": 50000,
+          "actualStep": 50000,
+          "rate": 0.58,
+          "score": 57.99999999999999,
+          "seen": null,
+          "rollouts": 50,
+          "round": "63d553987f5911f0"
+        },
+        {
+          "id": "r371103",
+          "modelId": "69119ceadebbc776",
+          "taskId": "94aaa6b21bae44da",
+          "epoch": 50000,
+          "actualStep": 50000,
+          "rate": 0.08,
+          "score": 24.800000000000015,
+          "seen": null,
+          "rollouts": 50,
+          "round": "ea34a602e4d25e75"
+        },
+        {
+          "id": "r371126",
+          "modelId": "69119ceadebbc776",
+          "taskId": "d3499a24d9726eaa",
+          "epoch": 30000,
+          "actualStep": 30000,
+          "rate": 0.22,
+          "score": 31.300000000000004,
+          "seen": null,
+          "rollouts": 50,
+          "round": "41ddfb03f449a2f9"
+        },
+        {
+          "id": "r371450",
+          "modelId": "8a78986c3db58e01",
+          "taskId": "57a688a344c715b8",
+          "epoch": 30000,
+          "actualStep": 30000,
+          "rate": 0.36,
+          "score": 36,
+          "seen": null,
+          "rollouts": 50,
+          "round": "b4765c50b703ac66"
+        },
+        {
+          "id": "r371507",
+          "modelId": "69119ceadebbc776",
+          "taskId": "57a688a344c715b8",
+          "epoch": 30000,
+          "actualStep": 30000,
+          "rate": 0.5,
+          "score": 50,
+          "seen": null,
+          "rollouts": 50,
+          "round": "861f5a7b7820356f"
         }
       ],
       "referenceRanking": [
@@ -19180,93 +19426,93 @@
         },
         {
           "modelId": "69119ceadebbc776",
-          "epoch": 80000,
-          "rate": 0.27999999999999997,
-          "score": 33.00000000000001,
+          "epoch": 50000,
+          "rate": 0.28285714285714286,
+          "score": 33.51428571428572,
           "cells": [
             {
-              "id": "r85846",
+              "id": "r371069",
               "modelId": "69119ceadebbc776",
               "taskId": "fa9a6d4ac8ddc9dd",
-              "epoch": 80000,
-              "actualStep": 80000,
-              "rate": 0.12,
-              "score": 12,
+              "epoch": 50000,
+              "actualStep": 50000,
+              "rate": 0.28,
+              "score": 28.000000000000004,
               "seen": null,
               "rollouts": 50,
-              "round": "74b6d7536e7d9e53"
+              "round": "e197d86acf4b967e"
             },
             {
-              "id": "r85878",
+              "id": "r371103",
               "modelId": "69119ceadebbc776",
               "taskId": "94aaa6b21bae44da",
-              "epoch": 80000,
-              "actualStep": 80000,
-              "rate": 0.12,
-              "score": 29.300000000000008,
+              "epoch": 50000,
+              "actualStep": 50000,
+              "rate": 0.08,
+              "score": 24.800000000000015,
               "seen": null,
               "rollouts": 50,
-              "round": "8d8ae4380b1c91c3"
+              "round": "ea34a602e4d25e75"
             },
             {
-              "id": "r85845",
+              "id": "r371066",
               "modelId": "69119ceadebbc776",
               "taskId": "6f5191440bd633ae",
-              "epoch": 80000,
-              "actualStep": 80000,
-              "rate": 0.58,
-              "score": 67,
+              "epoch": 50000,
+              "actualStep": 50000,
+              "rate": 0.4,
+              "score": 52.600000000000016,
               "seen": null,
               "rollouts": 50,
-              "round": "0ed2f4b94c781a97"
+              "round": "1cbdbc3da8b5e246"
             },
             {
-              "id": "r85841",
+              "id": "r371099",
               "modelId": "69119ceadebbc776",
               "taskId": "57a688a344c715b8",
-              "epoch": 80000,
-              "actualStep": 80000,
-              "rate": 0.44,
-              "score": 44,
+              "epoch": 50000,
+              "actualStep": 50000,
+              "rate": 0.58,
+              "score": 57.99999999999999,
               "seen": null,
               "rollouts": 50,
-              "round": "333508c48e2abc0d"
+              "round": "63d553987f5911f0"
             },
             {
-              "id": "r93512",
+              "id": "r371039",
               "modelId": "69119ceadebbc776",
               "taskId": "f9b8886e41100699",
-              "epoch": 80000,
-              "actualStep": 80000,
-              "rate": 0.5,
-              "score": 50,
+              "epoch": 50000,
+              "actualStep": 50000,
+              "rate": 0.32,
+              "score": 32,
               "seen": null,
               "rollouts": 50,
-              "round": "299c1024c1437e7c"
+              "round": "69c72a490835b433"
             },
             {
-              "id": "r86592",
+              "id": "r371060",
               "modelId": "69119ceadebbc776",
               "taskId": "b1b914b13d9b7768",
-              "epoch": 80000,
-              "actualStep": 80000,
+              "epoch": 50000,
+              "actualStep": 50000,
               "rate": 0.02,
               "score": 2,
               "seen": null,
               "rollouts": 50,
-              "round": "dd86c88457d6226e"
+              "round": "73cf405a339e41a8"
             },
             {
-              "id": "r86680",
+              "id": "r371055",
               "modelId": "69119ceadebbc776",
               "taskId": "d3499a24d9726eaa",
-              "epoch": 80000,
-              "actualStep": 80000,
-              "rate": 0.18,
-              "score": 26.700000000000006,
+              "epoch": 50000,
+              "actualStep": 50000,
+              "rate": 0.3,
+              "score": 37.2,
               "seen": null,
               "rollouts": 50,
-              "round": "74552252424f272f"
+              "round": "28f4d46dbc52f69f"
             }
           ]
         },
@@ -20003,6 +20249,98 @@
               "seen": null,
               "rollouts": 50,
               "round": "b8ff7819fb24c623"
+            }
+          ]
+        },
+        {
+          "modelId": "83c73828351d6c19",
+          "epoch": 50000,
+          "rate": 0.054285714285714284,
+          "score": 6.700000000000001,
+          "cells": [
+            {
+              "id": "r365014",
+              "modelId": "83c73828351d6c19",
+              "taskId": "fa9a6d4ac8ddc9dd",
+              "epoch": 50000,
+              "actualStep": 50000,
+              "rate": 0.06,
+              "score": 6,
+              "seen": null,
+              "rollouts": 50,
+              "round": "7e893cc74091d2c3"
+            },
+            {
+              "id": "r365061",
+              "modelId": "83c73828351d6c19",
+              "taskId": "94aaa6b21bae44da",
+              "epoch": 50000,
+              "actualStep": 50000,
+              "rate": 0,
+              "score": 3.499999999999999,
+              "seen": null,
+              "rollouts": 50,
+              "round": "7e893cc74091d2c3"
+            },
+            {
+              "id": "r365060",
+              "modelId": "83c73828351d6c19",
+              "taskId": "6f5191440bd633ae",
+              "epoch": 50000,
+              "actualStep": 50000,
+              "rate": 0.02,
+              "score": 6.199999999999998,
+              "seen": null,
+              "rollouts": 50,
+              "round": "7e893cc74091d2c3"
+            },
+            {
+              "id": "r365193",
+              "modelId": "83c73828351d6c19",
+              "taskId": "57a688a344c715b8",
+              "epoch": 50000,
+              "actualStep": 50000,
+              "rate": 0.14,
+              "score": 14.000000000000002,
+              "seen": null,
+              "rollouts": 50,
+              "round": "7e893cc74091d2c3"
+            },
+            {
+              "id": "r365217",
+              "modelId": "83c73828351d6c19",
+              "taskId": "f9b8886e41100699",
+              "epoch": 50000,
+              "actualStep": 50000,
+              "rate": 0.16,
+              "score": 16,
+              "seen": null,
+              "rollouts": 50,
+              "round": "7e893cc74091d2c3"
+            },
+            {
+              "id": "r365288",
+              "modelId": "83c73828351d6c19",
+              "taskId": "b1b914b13d9b7768",
+              "epoch": 50000,
+              "actualStep": 50000,
+              "rate": 0,
+              "score": 0,
+              "seen": null,
+              "rollouts": 50,
+              "round": "a2f70cc7b2f3f7a8"
+            },
+            {
+              "id": "r365334",
+              "modelId": "83c73828351d6c19",
+              "taskId": "d3499a24d9726eaa",
+              "epoch": 50000,
+              "actualStep": 50000,
+              "rate": 0,
+              "score": 1.2,
+              "seen": null,
+              "rollouts": 50,
+              "round": "7e893cc74091d2c3"
             }
           ]
         }
