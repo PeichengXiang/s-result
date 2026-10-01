@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-30T16:22:59.8112527Z",
+  "updatedAt": "2026-10-01T07:25:00.000Z",
   "source": "SparkArena and EgoVLA completed-results snapshot",
   "benchmarks": [
     {
@@ -19501,6 +19501,30 @@
           "seen": null,
           "rollouts": 50,
           "round": "97b2721eefe7d764"
+        },
+        {
+          "id": "r273658",
+          "modelId": "83c73828351d6c19",
+          "taskId": "b1b914b13d9b7768",
+          "epoch": 80000,
+          "actualStep": 80000,
+          "rate": 0,
+          "score": 0,
+          "seen": null,
+          "rollouts": 50,
+          "round": "91d0cb67a5e9b521"
+        },
+        {
+          "id": "r273659",
+          "modelId": "83c73828351d6c19",
+          "taskId": "d3499a24d9726eaa",
+          "epoch": 80000,
+          "actualStep": 80000,
+          "rate": 0,
+          "score": 1.2,
+          "seen": null,
+          "rollouts": 50,
+          "round": "91d0cb67a5e9b521"
         }
       ],
       "referenceRanking": [
@@ -20518,93 +20542,93 @@
         },
         {
           "modelId": "83c73828351d6c19",
-          "epoch": 50000,
+          "epoch": 80000,
           "rate": 0.054285714285714284,
-          "score": 6.700000000000001,
+          "score": 7.2,
           "cells": [
             {
-              "id": "r365014",
+              "id": "r273594",
               "modelId": "83c73828351d6c19",
               "taskId": "fa9a6d4ac8ddc9dd",
-              "epoch": 50000,
-              "actualStep": 50000,
-              "rate": 0.06,
-              "score": 6,
-              "seen": null,
-              "rollouts": 50,
-              "round": "7e893cc74091d2c3"
-            },
-            {
-              "id": "r365061",
-              "modelId": "83c73828351d6c19",
-              "taskId": "94aaa6b21bae44da",
-              "epoch": 50000,
-              "actualStep": 50000,
-              "rate": 0,
-              "score": 3.499999999999999,
-              "seen": null,
-              "rollouts": 50,
-              "round": "7e893cc74091d2c3"
-            },
-            {
-              "id": "r365060",
-              "modelId": "83c73828351d6c19",
-              "taskId": "6f5191440bd633ae",
-              "epoch": 50000,
-              "actualStep": 50000,
-              "rate": 0.02,
-              "score": 6.199999999999998,
-              "seen": null,
-              "rollouts": 50,
-              "round": "7e893cc74091d2c3"
-            },
-            {
-              "id": "r365193",
-              "modelId": "83c73828351d6c19",
-              "taskId": "57a688a344c715b8",
-              "epoch": 50000,
-              "actualStep": 50000,
-              "rate": 0.14,
-              "score": 14.000000000000002,
-              "seen": null,
-              "rollouts": 50,
-              "round": "7e893cc74091d2c3"
-            },
-            {
-              "id": "r365217",
-              "modelId": "83c73828351d6c19",
-              "taskId": "f9b8886e41100699",
-              "epoch": 50000,
-              "actualStep": 50000,
-              "rate": 0.16,
-              "score": 16,
-              "seen": null,
-              "rollouts": 50,
-              "round": "7e893cc74091d2c3"
-            },
-            {
-              "id": "r365288",
-              "modelId": "83c73828351d6c19",
-              "taskId": "b1b914b13d9b7768",
-              "epoch": 50000,
-              "actualStep": 50000,
+              "epoch": 80000,
+              "actualStep": 80000,
               "rate": 0,
               "score": 0,
               "seen": null,
               "rollouts": 50,
-              "round": "a2f70cc7b2f3f7a8"
+              "round": "91d0cb67a5e9b521"
             },
             {
-              "id": "r365334",
+              "id": "r273593",
+              "modelId": "83c73828351d6c19",
+              "taskId": "94aaa6b21bae44da",
+              "epoch": 80000,
+              "actualStep": 80000,
+              "rate": 0,
+              "score": 4.6,
+              "seen": null,
+              "rollouts": 50,
+              "round": "91d0cb67a5e9b521"
+            },
+            {
+              "id": "r273718",
+              "modelId": "83c73828351d6c19",
+              "taskId": "6f5191440bd633ae",
+              "epoch": 80000,
+              "actualStep": 80000,
+              "rate": 0.08,
+              "score": 14.599999999999996,
+              "seen": null,
+              "rollouts": 50,
+              "round": "91d0cb67a5e9b521"
+            },
+            {
+              "id": "r273670",
+              "modelId": "83c73828351d6c19",
+              "taskId": "57a688a344c715b8",
+              "epoch": 80000,
+              "actualStep": 80000,
+              "rate": 0.14,
+              "score": 14.000000000000002,
+              "seen": null,
+              "rollouts": 50,
+              "round": "91d0cb67a5e9b521"
+            },
+            {
+              "id": "r273660",
+              "modelId": "83c73828351d6c19",
+              "taskId": "f9b8886e41100699",
+              "epoch": 80000,
+              "actualStep": 80000,
+              "rate": 0.16,
+              "score": 16,
+              "seen": null,
+              "rollouts": 50,
+              "round": "91d0cb67a5e9b521"
+            },
+            {
+              "id": "r273658",
+              "modelId": "83c73828351d6c19",
+              "taskId": "b1b914b13d9b7768",
+              "epoch": 80000,
+              "actualStep": 80000,
+              "rate": 0,
+              "score": 0,
+              "seen": null,
+              "rollouts": 50,
+              "round": "91d0cb67a5e9b521"
+            },
+            {
+              "id": "r273659",
               "modelId": "83c73828351d6c19",
               "taskId": "d3499a24d9726eaa",
-              "epoch": 50000,
-              "actualStep": 50000,
+              "epoch": 80000,
+              "actualStep": 80000,
               "rate": 0,
               "score": 1.2,
               "seen": null,
               "rollouts": 50,
-              "round": "7e893cc74091d2c3"
+              "round": "91d0cb67a5e9b521"
             }
           ]
         }
