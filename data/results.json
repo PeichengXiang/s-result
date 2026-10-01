@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-01T13:24:04.009Z",
+  "updatedAt": "2026-10-01T16:26:37.301Z",
   "source": "SparkArena and EgoVLA completed-results snapshot",
   "benchmarks": [
     {
@@ -467,6 +467,12 @@
           "policy": "spark_0",
           "label": "Spark 0",
           "name": "spark_tactile_full_pretrain_30w"
+        },
+        {
+          "id": "a2ef12c712ce2d68",
+          "policy": "spark_0",
+          "label": "Spark 0",
+          "name": "spark_tactile_full_pretrain_30w_8w"
         }
       ],
       "records": [
@@ -19933,6 +19939,18 @@
           "seen": null,
           "rollouts": 50,
           "round": "224097f47d8692df"
+        },
+        {
+          "id": "r379615",
+          "modelId": "a2ef12c712ce2d68",
+          "taskId": "fa9a6d4ac8ddc9dd",
+          "epoch": 5000,
+          "actualStep": 5000,
+          "rate": 0.08,
+          "score": 8,
+          "seen": null,
+          "rollouts": 50,
+          "round": "f1d15e312b14fcd7"
         }
       ],
       "referenceRanking": [
