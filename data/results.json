@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-01T07:25:00.000Z",
+  "updatedAt": "2026-10-01T10:24:00.000Z",
   "source": "SparkArena and EgoVLA completed-results snapshot",
   "benchmarks": [
     {
@@ -19505,7 +19505,7 @@
         {
           "id": "r273658",
           "modelId": "83c73828351d6c19",
-          "taskId": "b1b914b13d9b7768",
+          "taskId": "d3499a24d9726eaa",
           "epoch": 80000,
           "actualStep": 80000,
           "rate": 0,
@@ -19517,7 +19517,7 @@
         {
           "id": "r273659",
           "modelId": "83c73828351d6c19",
-          "taskId": "d3499a24d9726eaa",
+          "taskId": "b1b914b13d9b7768",
           "epoch": 80000,
           "actualStep": 80000,
           "rate": 0,
@@ -20607,25 +20607,25 @@
               "round": "91d0cb67a5e9b521"
             },
             {
-              "id": "r273658",
+              "id": "r273659",
               "modelId": "83c73828351d6c19",
               "taskId": "b1b914b13d9b7768",
               "epoch": 80000,
               "actualStep": 80000,
               "rate": 0,
-              "score": 0,
+              "score": 1.2,
               "seen": null,
               "rollouts": 50,
               "round": "91d0cb67a5e9b521"
             },
             {
-              "id": "r273659",
+              "id": "r273658",
               "modelId": "83c73828351d6c19",
               "taskId": "d3499a24d9726eaa",
               "epoch": 80000,
               "actualStep": 80000,
               "rate": 0,
-              "score": 1.2,
+              "score": 0,
               "seen": null,
               "rollouts": 50,
               "round": "91d0cb67a5e9b521"
