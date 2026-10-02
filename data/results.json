@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-01T22:24:40.451Z",
+  "updatedAt": "2026-10-02T01:27:16.283Z",
   "source": "SparkArena and EgoVLA completed-results snapshot",
   "benchmarks": [
     {
@@ -20719,6 +20719,66 @@
           "seen": null,
           "rollouts": 50,
           "round": "3a109098d937aee1"
+        },
+        {
+          "id": "r385273",
+          "modelId": "a2ef12c712ce2d68",
+          "taskId": "fa9a6d4ac8ddc9dd",
+          "epoch": 55000,
+          "actualStep": 55000,
+          "rate": 0.28,
+          "score": 28.000000000000004,
+          "seen": null,
+          "rollouts": 50,
+          "round": "5066c95a276cdc47"
+        },
+        {
+          "id": "r385321",
+          "modelId": "a2ef12c712ce2d68",
+          "taskId": "94aaa6b21bae44da",
+          "epoch": 55000,
+          "actualStep": 55000,
+          "rate": 0.08,
+          "score": 16.3,
+          "seen": null,
+          "rollouts": 50,
+          "round": "eb3883f95945e2ca"
+        },
+        {
+          "id": "r385347",
+          "modelId": "a2ef12c712ce2d68",
+          "taskId": "6f5191440bd633ae",
+          "epoch": 55000,
+          "actualStep": 55000,
+          "rate": 0.52,
+          "score": 64.00000000000001,
+          "seen": null,
+          "rollouts": 50,
+          "round": "17683683b5113098"
+        },
+        {
+          "id": "r385653",
+          "modelId": "a2ef12c712ce2d68",
+          "taskId": "57a688a344c715b8",
+          "epoch": 55000,
+          "actualStep": 55000,
+          "rate": 0.54,
+          "score": 54,
+          "seen": null,
+          "rollouts": 50,
+          "round": "c12e3a33116448c7"
+        },
+        {
+          "id": "r385745",
+          "modelId": "a2ef12c712ce2d68",
+          "taskId": "f9b8886e41100699",
+          "epoch": 55000,
+          "actualStep": 55000,
+          "rate": 0.4,
+          "score": 40,
+          "seen": null,
+          "rollouts": 50,
+          "round": "a9efa2c286e0deae"
         }
       ],
       "referenceRanking": [
