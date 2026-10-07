@@ -224,6 +224,26 @@ export function egoVlaSetting(model: Model): EgoSetting {
   if (policy === 'starvla') return { key: 'starvla', label: 'StarVLA' };
   if (policy === 'spark_0') {
     const name = model.name.toLowerCase();
+    const registryType = String(
+      (model as Model & { registryType?: string | null }).registryType ?? '',
+    ).toLowerCase();
+    // Eval Web assigns these buckets from the model-root registry. Keep that
+    // authoritative metadata ahead of the explicit name allowlist so new
+    // checkpoint names remain aligned without broad substring inference.
+    if (registryType === 'spark_visual_pretrain')
+      return { key: 'spark_visual_pretrain', label: 'Spark(visual pretrain)' };
+    if (registryType === 'spark_tactile_100h_pretrain')
+      return {
+        key: 'spark_tactile_100h_pretrain',
+        label: 'Spark(tactile-100h pretrain)',
+      };
+    if (registryType === 'spark_tactile_full_pretrain')
+      return {
+        key: 'spark_tactile_full_pretrain',
+        label: 'Spark(tactile-full pretrain)',
+      };
+    if (registryType === 'spark_no_pretrain')
+      return { key: 'spark_no_pretrain', label: 'Spark(wuji,no pretrain)' };
     if (EGO_STARVLA_MODELS.has(name) || name.includes('starvla'))
       return { key: 'starvla', label: 'StarVLA' };
     if (EGO_VISUAL_PRETRAIN_MODELS.has(name))

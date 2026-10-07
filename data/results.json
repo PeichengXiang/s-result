@@ -28089,25 +28089,33 @@
           "id": "e17c0fa5a8ab4a29",
           "policy": "spark_0",
           "label": "Spark 0",
-          "name": "egovla_spark_tactile0913_pretrain_30w"
+          "name": "egovla_spark_tactile0913_pretrain_30w",
+          "modelRootId": 371,
+          "registryType": "spark_tactile_full_pretrain"
         },
         {
           "id": "833b81a8f1a9e375",
           "policy": "spark_0",
           "label": "Spark 0",
-          "name": "starvla_0929ee_egovlabenchmark"
+          "name": "starvla_0929ee_egovlabenchmark",
+          "modelRootId": 373,
+          "registryType": "spark"
         },
         {
           "id": "864df2b49673c187",
           "policy": "spark_0",
           "label": "Spark 0",
-          "name": "1002_egovla_tactile_arch_pretrain_0913_35w"
+          "name": "1002_egovla_tactile_arch_pretrain_0913_35w",
+          "modelRootId": 377,
+          "registryType": "spark_tactile_full_pretrain"
         },
         {
           "id": "a3a62655bf5fd7ad",
           "policy": "spark_0",
           "label": "Spark 0",
-          "name": "1002_egovla_wo_tactile_arch_pretrain_0913_35w"
+          "name": "1002_egovla_wo_tactile_arch_pretrain_0913_35w",
+          "modelRootId": 378,
+          "registryType": "spark_tactile_full_pretrain"
         }
       ],
       "records": [
