@@ -286,18 +286,22 @@ function egoPsr(point: RecordRow, split: EgoSplit) {
 
 function betterEgoPoint(a: RecordRow, b: RecordRow, split: EgoSplit) {
   return (
+    // Result analysis uses the latest completed task evaluation for a
+    // model/checkpoint. Keep the metric fields as tie-breakers only; an older
+    // higher score must not replace a newer completed result.
+    Number(b.id.slice(1)) - Number(a.id.slice(1)) ||
     (egoMetric(b, split) ?? -1) - (egoMetric(a, split) ?? -1) ||
     (egoPsr(b, split) ?? -1) - (egoPsr(a, split) ?? -1) ||
     (b.score ?? -1) - (a.score ?? -1) ||
-    b.rollouts - a.rollouts ||
-    Number(b.id.slice(1)) - Number(a.id.slice(1))
+    b.rollouts - a.rollouts
   );
 }
 
 /**
  * Reproduce the eval Web EgoVLA paper-table selection:
- * select the best repeat independently for each model/step/task, then select
- * the best step inside each policy/setting by the equal-weight mean.
+ * select the latest completed result independently for each
+ * model/step/task, then select the best step inside each policy/setting by
+ * the equal-weight mean.
  */
 export function egoVlaLeaderboard(
   bench: Benchmark,
