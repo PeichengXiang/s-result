@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-08T19:58:51.058Z",
+  "updatedAt": "2026-10-08T22:59:53.831Z",
   "source": "SparkArena and EgoVLA completed-results snapshot",
   "benchmarks": [
     {
@@ -45590,6 +45590,76 @@
           "round": "b3a58d5167c93e5d",
           "psrSeen": 0.8518518518518519,
           "psrUnseen": 0.7045454545454546
+        },
+        {
+          "id": "r447121",
+          "modelId": "6232cdf9b28bf1d3",
+          "taskId": "b72565dfae232e52",
+          "epoch": 80000,
+          "actualStep": 80000,
+          "rate": 0.21212121212121213,
+          "score": 21.21212121212121,
+          "seen": 0.18518518518518517,
+          "rollouts": 93,
+          "round": "b3a58d5167c93e5d",
+          "psrSeen": 0.4074074074074074,
+          "psrUnseen": 0.41818181818181815
+        },
+        {
+          "id": "r447028",
+          "modelId": "6232cdf9b28bf1d3",
+          "taskId": "78bad59b7de44579",
+          "epoch": 80000,
+          "actualStep": 80000,
+          "rate": 0.5151515151515151,
+          "score": 51.515151515151516,
+          "seen": 0.5555555555555556,
+          "rollouts": 93,
+          "round": "b3a58d5167c93e5d",
+          "psrSeen": 0.6851851851851852,
+          "psrUnseen": 0.6931818181818182
+        },
+        {
+          "id": "r447040",
+          "modelId": "6232cdf9b28bf1d3",
+          "taskId": "2595277d6b507a34",
+          "epoch": 80000,
+          "actualStep": 80000,
+          "rate": 0.7575757575757576,
+          "score": 75.75757575757575,
+          "seen": 0.9259259259259259,
+          "rollouts": 93,
+          "round": "b3a58d5167c93e5d",
+          "psrSeen": 0.9814814814814815,
+          "psrUnseen": 0.9393939393939394
+        },
+        {
+          "id": "r446980",
+          "modelId": "6232cdf9b28bf1d3",
+          "taskId": "6c03003d7ca18979",
+          "epoch": 80000,
+          "actualStep": 80000,
+          "rate": 0.7878787878787878,
+          "score": 78.78787878787878,
+          "seen": 0.8518518518518519,
+          "rollouts": 93,
+          "round": "b3a58d5167c93e5d",
+          "psrSeen": 0.9074074074074074,
+          "psrUnseen": 0.8825757575757576
+        },
+        {
+          "id": "r446978",
+          "modelId": "6232cdf9b28bf1d3",
+          "taskId": "12f18e05c47edb3d",
+          "epoch": 80000,
+          "actualStep": 80000,
+          "rate": 0.6515151515151515,
+          "score": 65.15151515151516,
+          "seen": 0.7037037037037037,
+          "rollouts": 93,
+          "round": "b3a58d5167c93e5d",
+          "psrSeen": 0.8518518518518519,
+          "psrUnseen": 0.8181818181818182
         }
       ],
       "referenceRanking": [
