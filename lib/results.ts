@@ -297,6 +297,33 @@ function betterEgoPoint(a: RecordRow, b: RecordRow, split: EgoSplit) {
   );
 }
 
+function latestEgoCells(
+  tasks: Benchmark['tasks'],
+  points: RecordRow[],
+  split: EgoSplit,
+) {
+  let remaining = points;
+  while (true) {
+    const cells = tasks.map(
+      (task) =>
+        remaining
+          .filter((point) => point.taskId === task.id)
+          .sort((a, b) => betterEgoPoint(a, b, split))[0] ?? null,
+    );
+    // Match eval Web's zero-layer fallback: if every latest task result is
+    // zero, retry with the previous completed layer for this model/weight.
+    if (
+      cells.some((cell) => cell === null) ||
+      cells.some((cell) => cell !== null && (egoMetric(cell, split) ?? 0) > 0)
+    )
+      return cells;
+    const selected = new Set(cells.filter((cell): cell is RecordRow => cell !== null));
+    const earlier = remaining.filter((point) => !selected.has(point));
+    if (!earlier.length) return cells;
+    remaining = earlier;
+  }
+}
+
 /**
  * Reproduce the eval Web EgoVLA paper-table selection:
  * select the latest completed result independently for each
@@ -330,12 +357,7 @@ export function egoVlaLeaderboard(
   for (const points of byModelEpoch.values()) {
     const model = bench.models.find((item) => item.id === points[0].modelId);
     if (!model) continue;
-    const cells = tasks.map(
-      (task) =>
-        points
-          .filter((point) => point.taskId === task.id)
-          .sort((a, b) => betterEgoPoint(a, b, split))[0] ?? null,
-    );
+    const cells = latestEgoCells(tasks, points, split);
     if (cells.some((cell) => cell === null)) continue;
     const enrichedCells = cells.map((cell) =>
       cell
